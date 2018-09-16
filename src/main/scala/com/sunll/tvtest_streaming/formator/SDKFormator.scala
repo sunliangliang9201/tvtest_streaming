@@ -31,6 +31,7 @@ class SDKFormator extends LogFormator {
       paramMap += "country" -> tup._1
       paramMap += "province" -> tup._2
       paramMap += "city" -> tup._3
+      paramMap += "isp" -> tup._4
       if(!paramMap.getOrElse("enc", "0").equals("0")){
         paramMap("log") = SDKDecoder.decode(paramMap("log"))
         paramMap("ltype") = SDKDecoder.decode(paramMap("ltype"))

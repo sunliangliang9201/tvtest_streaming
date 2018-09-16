@@ -5,7 +5,7 @@ import java.sql.{Connection, DriverManager, PreparedStatement}
 import com.sunll.tvtest_streaming.model.StreamingKeyConfig
 import com.sunll.tvtest_streaming.utils.ConfigUtil
 
-import scala.collection.mutable.ListBuffer
+import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 
 /**
   * mysql funcs object
@@ -13,9 +13,9 @@ import scala.collection.mutable.ListBuffer
   * @version 1.0
   */
 object MysqlDao {
-
+  val insertSQL = "insert into %s(%s) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
   val streamingSQL = "select streaming_key, app_name, driver_cores, formator, topics, group_id, table_name, fields, broker_list from realtime_streaming_config where streaming_key = ?"
-  val configSQL = "select field,turn from tvtest_streaming_fields where enabled = 1 and streaming_key = ?"
+  val configSQL = "select field,turn from tvtest_streaming_fields where enabled = 1 and streaming_key = ? order by turn"
   def findStreamingKeyConfig(streamingKey: String): StreamingKeyConfig = {
     val jdbcUrl = ConfigUtil.getConf.get.getString("cangku_host")
     val user = ConfigUtil.getConf.get.getString("cangku_username")
@@ -91,7 +91,7 @@ object MysqlDao {
     }
     fieldsList
   }
-  def insertBatch(y: Iterator[ListBuffer[String]]): Unit ={
+  def insertBatch(y: Iterator[ListBuffer[String]], tableName:String, fieldsList: ListBuffer[(String, Int)]): Unit ={
     var conn: Connection = null
     var ps: PreparedStatement = null
     val jdbcUrl = ConfigUtil.getConf.get.getString("tvtest_host")
@@ -102,12 +102,20 @@ object MysqlDao {
     try{
       Class.forName("com.mysql.jdbc.Driver")
       conn = DriverManager.getConnection("jdbc:mysql://" + jdbcUrl + ":" + port + "/" + db, user, passwd)
-      ps = conn.prepareStatement(configSQL)
-      ps.setString(1, streamingKey)
-      val res = ps.executeQuery()
-      while(res.next()){
-        fieldsList.append((res.getString("field"), res.getInt("turn")))
+      conn.setAutoCommit(false)
+      var arr = ArrayBuffer[String]()
+      for(i <- 0 until fieldsList.length){
+        arr += fieldsList(i)._1
       }
+      ps = conn.prepareStatement(insertSQL.format(tableName, arr.mkString(",")))
+      for(i <- y){
+        for(j <- 1 to i.length){
+          ps.setString(j, i(j-1))
+        }
+        ps.addBatch()
+      }
+      ps.executeBatch()
+      conn.commit()
     }catch{
       case e:Exception => println(e)
     }finally {

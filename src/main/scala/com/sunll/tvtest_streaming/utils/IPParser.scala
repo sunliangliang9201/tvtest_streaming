@@ -1,8 +1,17 @@
 package com.sunll.tvtest_streaming.utils
 
-object IPParser {
+import scala.io.Source
 
-  def parse(ip: String): (String, String, String) = {
-    ("a", "b", "c")
+object IPParser {
+  val ipMap: Map[]
+  def parse(ip: String): (String, String, String, String) = {
+    ("a", "b", "c", "d")
+  }
+
+  def main(args: Array[String]): Unit = {
+    val ip_area_isp = Source.fromFile("ip_area_isp.txt")
+    for(line <- ip_area_isp.getLines()){
+
+    }
   }
 }

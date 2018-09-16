@@ -52,13 +52,12 @@ object TvtestStreamingMain {
     println(kafkaParams)
     println(topicSet)
     val kafakaDStream = KafkaUtils.createDirectStream[String, String, StringDecoder, StringDecoder](ssc, kafkaParams, topicSet)
-    println(11111)
     //关键点：通过清洗类清洗日志所有字段
     val logFormator = Class.forName(Constants.FORMATOR_PACACKE_PREFIX + streamingKeyConfig.formator).newInstance().asInstanceOf[LogFormator]
     //清洗入库
     kafakaDStream.map(x => {
       logFormator.format(x._2, fieldsList)
-    }).foreachRDD(x => x.foreachPartition(y => MysqlDao.insertBatch(y)))
+    }).foreachRDD(x => x.foreachPartition(y => MysqlDao.insertBatch(y, streamingKeyConfig.tableName, fieldsList)))
     ssc.start()
     ssc.awaitTermination()
   }
