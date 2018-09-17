@@ -17,11 +17,11 @@ object MysqlDao {
   val streamingSQL = "select streaming_key, app_name, driver_cores, formator, topics, group_id, table_name, fields, broker_list from realtime_streaming_config where streaming_key = ?"
   val configSQL = "select field,turn from tvtest_streaming_fields where enabled = 1 and streaming_key = ? order by turn"
   def findStreamingKeyConfig(streamingKey: String): StreamingKeyConfig = {
-    val jdbcUrl = ConfigUtil.getConf.get.getString("cangku_host")
-    val user = ConfigUtil.getConf.get.getString("cangku_username")
-    val passwd = ConfigUtil.getConf.get.getString("cangku_password")
-    val db = ConfigUtil.getConf.get.getString("cangku_datebase")
-    val port = ConfigUtil.getConf.get.getString("cangku_port")
+    val jdbcUrl = ConfigUtil.getConf.get.getString("tvtest_host")
+    val user = ConfigUtil.getConf.get.getString("tvtest_username")
+    val passwd = ConfigUtil.getConf.get.getString("tvtest_password")
+    val db = ConfigUtil.getConf.get.getString("tvtest_datebase")
+    val port = ConfigUtil.getConf.get.getString("tvtest_port")
     var conn: Connection = null
     var ps: PreparedStatement = null
     var streamingKeyConfig: StreamingKeyConfig = null

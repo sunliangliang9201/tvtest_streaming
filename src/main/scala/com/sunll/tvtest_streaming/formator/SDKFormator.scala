@@ -58,6 +58,7 @@ class SDKFormator extends LogFormator {
       case e: Exception => logger.error("fail to format log" + logStr, e)
     }
     val realLog = URLDecoder.decode(logStr, "utf-8")
+    println(fieldValues)
     fieldValues
   }
 
