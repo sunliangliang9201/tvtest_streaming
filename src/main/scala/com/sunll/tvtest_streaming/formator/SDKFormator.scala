@@ -7,7 +7,7 @@ import org.json4s.jackson.Json
 import org.slf4j.LoggerFactory
 
 import scala.collection.mutable
-import scala.collection.mutable.ListBuffer
+import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 import scala.util.parsing.json.JSON
 
 
@@ -20,6 +20,7 @@ import scala.util.parsing.json.JSON
 class SDKFormator extends LogFormator {
   val logger = LoggerFactory.getLogger(this.getClass)
   val logRegex = """(\d+\.\d+\.\d+\.\d+).*?logger.php\?(.*?) HTTP.*""".r
+  val ipAreaIspCache: ArrayBuffer[String] = IPParser.readIPAreaIsp("src/main/resources/ip_area_isp.txt")
   override def format(logStr: String, fields: ListBuffer[(String, Int)]): ListBuffer[String] = {
     val fieldValues = ListBuffer.fill(fields.length)("-")
     var paramMap: mutable.Map[String, String] = mutable.Map[String, String]()
@@ -27,7 +28,7 @@ class SDKFormator extends LogFormator {
       val logRegex(ip, query) = logStr
       val fieldsLogList = query.split("&").toList
       fieldsLogList.map(x => paramMap += x.split("=")(0) -> x.split("=")(1))
-      val tup = IPParser.parse(ip)
+      val tup = IPParser.parse(ip, ipAreaIspCache)
       paramMap += "country" -> tup._1
       paramMap += "province" -> tup._2
       paramMap += "city" -> tup._3

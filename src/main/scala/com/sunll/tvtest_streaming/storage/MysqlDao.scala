@@ -4,6 +4,7 @@ import java.sql.{Connection, DriverManager, PreparedStatement}
 
 import com.sunll.tvtest_streaming.model.StreamingKeyConfig
 import com.sunll.tvtest_streaming.utils.ConfigUtil
+import org.slf4j.LoggerFactory
 
 import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 
@@ -14,8 +15,13 @@ import scala.collection.mutable.{ArrayBuffer, ListBuffer}
   */
 object MysqlDao {
   val insertSQL = "insert into %s(%s) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+
   val streamingSQL = "select streaming_key, app_name, driver_cores, formator, topics, group_id, table_name, fields, broker_list from realtime_streaming_config where streaming_key = ?"
+
   val configSQL = "select field,turn from tvtest_streaming_fields where enabled = 1 and streaming_key = ? order by turn"
+
+  val logger = LoggerFactory.getLogger(this.getClass)
+
   def findStreamingKeyConfig(streamingKey: String): StreamingKeyConfig = {
     val jdbcUrl = ConfigUtil.getConf.get.getString("tvtest_host")
     val user = ConfigUtil.getConf.get.getString("tvtest_username")
@@ -49,7 +55,7 @@ object MysqlDao {
         throw new Exception("mysql strming key set error...")
       }
     } catch {
-      case e: Exception => println(e)
+      case e: Exception => logger.error("findStreamingKeyConfig error...")
     } finally {
       if (ps != null) {
         ps.close()
@@ -70,6 +76,7 @@ object MysqlDao {
     val passwd = ConfigUtil.getConf.get.getString("tvtest_password")
     val db = ConfigUtil.getConf.get.getString("tvtest_datebase")
     val port = ConfigUtil.getConf.get.getString("tvtest_port")
+
     try{
       Class.forName("com.mysql.jdbc.Driver")
       conn = DriverManager.getConnection("jdbc:mysql://" + jdbcUrl + ":" + port + "/" + db, user, passwd)
@@ -80,7 +87,8 @@ object MysqlDao {
         fieldsList.append((res.getString("field"), res.getInt("turn")))
       }
     }catch{
-      case e:Exception => println(e)
+      throw new Exception("mysql strming key fields set error...")
+      case e:Exception => logger.error("findStreamingKeyFileldsConfig error...")
     }finally {
       if (ps != null) {
         ps.close()
@@ -91,6 +99,7 @@ object MysqlDao {
     }
     fieldsList
   }
+
   def insertBatch(y: Iterator[ListBuffer[String]], tableName:String, fieldsList: ListBuffer[(String, Int)]): Unit ={
     var conn: Connection = null
     var ps: PreparedStatement = null
@@ -99,6 +108,7 @@ object MysqlDao {
     val passwd = ConfigUtil.getConf.get.getString("tvtest_password")
     val db = ConfigUtil.getConf.get.getString("tvtest_datebase")
     val port = ConfigUtil.getConf.get.getString("tvtest_port")
+
     try{
       Class.forName("com.mysql.jdbc.Driver")
       conn = DriverManager.getConnection("jdbc:mysql://" + jdbcUrl + ":" + port + "/" + db, user, passwd)
@@ -117,7 +127,7 @@ object MysqlDao {
       ps.executeBatch()
       conn.commit()
     }catch{
-      case e:Exception => println(e)
+      case e:Exception => logger.error("insert into result error...")
     }finally {
       if (ps != null) {
         ps.close()

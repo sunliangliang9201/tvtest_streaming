@@ -2,6 +2,12 @@ package com.sunll.tvtest_streaming.utils
 
 import java.net.URLDecoder
 
+/**
+  * if env in the log is not 0, then we need to decode.
+  * @author sunliangliang 2018-09-16
+  * @version 1.0
+  *
+  */
 object SDKDecoder {
 
   def decode(logStr: String): String = {

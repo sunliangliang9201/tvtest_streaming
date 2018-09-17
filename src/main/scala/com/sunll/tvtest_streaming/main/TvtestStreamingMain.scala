@@ -36,8 +36,7 @@ object TvtestStreamingMain {
       logger.error("No streaming config found...")
       System.exit(-1)
     }
-    println(streamingKeyConfig.toString)
-
+    logger.info("success load the config" + streamingKeyConfig)
     val conf = new SparkConf().setAppName(streamingKeyConfig.appName).set("spark.driver.cores", streamingKeyConfig.driverCores).setMaster("local[2]")
     val ssc = new StreamingContext(conf, Seconds(streamingIntervalTime))
     //更新mysql中result字段配置
@@ -49,8 +48,8 @@ object TvtestStreamingMain {
                                                 "zookeeper.connect" -> ConfigUtil.getConf.get.getString("zookeeper_list"),
                                                 "auto.offset.reset" -> ConfigUtil.getConf.get.getString("auto_offset_reset"))
     val topicSet = streamingKeyConfig.topics.split(",").toSet
-    println(kafkaParams)
-    println(topicSet)
+    logger.info("success to load kafkaParams " + kafkaParams)
+    logger.info("success to load topics " + topicSet)
     val kafakaDStream = KafkaUtils.createDirectStream[String, String, StringDecoder, StringDecoder](ssc, kafkaParams, topicSet)
     //关键点：通过清洗类清洗日志所有字段
     val logFormator = Class.forName(Constants.FORMATOR_PACACKE_PREFIX + streamingKeyConfig.formator).newInstance().asInstanceOf[LogFormator]
