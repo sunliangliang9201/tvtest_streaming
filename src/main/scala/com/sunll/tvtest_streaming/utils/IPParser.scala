@@ -16,9 +16,18 @@ import scala.collection.mutable.ArrayBuffer
   */
 
 object IPParser {
+
   val logger =LoggerFactory.getLogger(this.getClass)
+
   var client: HttpClient = new HttpClient
+
   var method: GetMethod = null
+
+  /**
+    * 该方法还没有完成，目的是通过访问现成的接口来获取ip信息
+    * @param ip ip
+    * @return 一个地理位置元祖
+    */
   def parse2(ip: String): (String, String, String, String) = {
     val taobaoURL = "http://ip.taobao.com/service/getIpInfo.php?ip=" + ip
     try{
@@ -35,6 +44,12 @@ object IPParser {
     ("a", "b", "c", "d")
   }
 
+  /**
+    * 根据已有的ip_area_isp.txt来匹配ip
+    * @param ip ip
+    * @param ipAreaIspCache 缓存的地理位置信息
+    * @return 返回元祖结果
+    */
   def parse(ip: String, ipAreaIspCache: ArrayBuffer[String]): (String, String, String, String) = {
     if(binarySearch(ipAreaIspCache, ip2Long(ip)) != -1){
       val res = ipAreaIspCache(binarySearch(ipAreaIspCache, ip2Long(ip)))
@@ -45,6 +60,11 @@ object IPParser {
     }
   }
 
+  /**
+    * ip to long
+    * @param ip ip
+    * @return long值
+    */
   def ip2Long(ip: String): Long = {
     val fragments = ip.split("\\.")
     var ipNum = 0L
@@ -54,6 +74,12 @@ object IPParser {
     ipNum
   }
 
+  /**
+    * 二分法查找ip对应的long值在缓存文件中（ArratBuffer）中的索引
+    * @param lines 缓存的array
+    * @param ip ip
+    * @return 索引值
+    */
   def binarySearch(lines: ArrayBuffer[String], ip: Long): Int ={
     // 中国	福建省	福州市	铁通	3546428672	3546428679
     var low = 0
@@ -75,6 +101,11 @@ object IPParser {
     return -1
   }
 
+  /**
+    * 把ip_area_isp.txt缓存到ArrayBuffer中
+    * @param path file path
+    * @return array
+    */
   def readIPAreaIsp(path: String): ArrayBuffer[String] = {
     var br: BufferedReader = null
     var s: String = null
@@ -100,6 +131,10 @@ object IPParser {
     lines
   }
 
+  /**
+    * 测试main
+    * @param args
+    */
   def main(args: Array[String]): Unit = {
 //    readIPAreaIsp("src/main/resources/ip_area_isp.txt")
    // val res = binarySearch(readIPAreaIsp("src/main/resources/ip_area_isp.txt"), 3546428673L)

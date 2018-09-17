@@ -40,8 +40,7 @@ object TvtestStreamingMain {
     val conf = new SparkConf().setAppName(streamingKeyConfig.appName).set("spark.driver.cores", streamingKeyConfig.driverCores).setMaster("local[2]")
     val ssc = new StreamingContext(conf, Seconds(streamingIntervalTime))
     //更新mysql中result字段配置
-    ReloadConfigManager.init(60*1000, streamingKey)
-    var fieldsList: ListBuffer[(String, Int)] = ReloadConfigManager.getFields
+    ReloadConfigManager.init(60*1000, streamingKey, streamingKeyConfig)
     //kafka配置
     val kafkaParams: Map[String, String] = Map("metadata.broker.list" -> streamingKeyConfig.brolerList,
                                                 "group.id" -> streamingKeyConfig.groupID,
@@ -55,8 +54,8 @@ object TvtestStreamingMain {
     val logFormator = Class.forName(Constants.FORMATOR_PACACKE_PREFIX + streamingKeyConfig.formator).newInstance().asInstanceOf[LogFormator]
     //清洗入库
     kafakaDStream.map(x => {
-      logFormator.format(x._2, fieldsList)
-    }).foreachRDD(x => x.foreachPartition(y => MysqlDao.insertBatch(y, streamingKeyConfig.tableName, fieldsList)))
+      logFormator.format(x._2)
+    }).foreachRDD(x => x.foreachPartition(y => MysqlDao.insertBatch(y, streamingKeyConfig.tableName)))
     ssc.start()
     ssc.awaitTermination()
   }

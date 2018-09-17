@@ -12,6 +12,10 @@ import scala.collection.mutable.ListBuffer
   */
 
 trait LogFormator extends Serializable{
-
-  def format(logStr: String, fields: ListBuffer[(String, Int)]): ListBuffer[String]
+  /**
+    * 待实现的方法
+    * @param logStr 原始日志
+    * @return 结果
+    */
+  def format(logStr: String): ListBuffer[String]
 }

@@ -12,6 +12,10 @@ object ConfigUtil {
 
   val conf = ConfigFactory.load("application.properties")
 
+  /**
+    * 从配置文件中获取某个配置项
+    * @return
+    */
   def getConf: Option[Config] = {
     Some(conf)
   }

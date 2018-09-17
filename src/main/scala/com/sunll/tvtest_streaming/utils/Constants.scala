@@ -8,6 +8,9 @@ package com.sunll.tvtest_streaming.utils
 object Constants {
 
   val FIELD_SPLITER = ","
+
   val INDEX_SPLITER = "-"
+
   val FORMATOR_PACACKE_PREFIX = "com.sunll.tvtest_streaming.formator."
+
 }

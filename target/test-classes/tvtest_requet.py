@@ -7,7 +7,7 @@ base_url = 'http://103.15.200.3/logger.php'
 
 print 1
 while 1:
-    time.sleep(3)
+    time.sleep(5)
     timestamp = time.time()
     timestruct = time.localtime(timestamp)
     tt = time.strftime('%Y-%m-%d %H:%M:%S', timestruct)
