@@ -31,17 +31,11 @@ object MysqlDao {
     * @return 返回配置样例类对象
     */
   def findStreamingKeyConfig(streamingKey: String): StreamingKeyConfig = {
-    val jdbcUrl = ConfigUtil.getConf.get.getString("tvtest_host")
-    val user = ConfigUtil.getConf.get.getString("tvtest_username")
-    val passwd = ConfigUtil.getConf.get.getString("tvtest_password")
-    val db = ConfigUtil.getConf.get.getString("tvtest_datebase")
-    val port = ConfigUtil.getConf.get.getString("tvtest_port")
     var conn: Connection = null
     var ps: PreparedStatement = null
     var streamingKeyConfig: StreamingKeyConfig = null
     try {
-      Class.forName("com.mysql.jdbc.Driver")
-      conn = DriverManager.getConnection("jdbc:mysql://" + jdbcUrl + ":" + port + "/" + db, user, passwd)
+      conn = MysqlManager.getMysqlManager.getConnection
       ps = conn.prepareStatement(streamingSQL)
       ps.setString(1, streamingKey)
       val res = ps.executeQuery()
@@ -84,15 +78,9 @@ object MysqlDao {
     val fieldsList: ListBuffer[(String,Int)] = new ListBuffer[(String, Int)]()
     var conn: Connection = null
     var ps: PreparedStatement = null
-    val jdbcUrl = ConfigUtil.getConf.get.getString("tvtest_host")
-    val user = ConfigUtil.getConf.get.getString("tvtest_username")
-    val passwd = ConfigUtil.getConf.get.getString("tvtest_password")
-    val db = ConfigUtil.getConf.get.getString("tvtest_datebase")
-    val port = ConfigUtil.getConf.get.getString("tvtest_port")
 
     try{
-      Class.forName("com.mysql.jdbc.Driver")
-      conn = DriverManager.getConnection("jdbc:mysql://" + jdbcUrl + ":" + port + "/" + db, user, passwd)
+      conn = MysqlManager.getMysqlManager.getConnection
       ps = conn.prepareStatement(configSQL)
       ps.setString(1, streamingKey)
       val res = ps.executeQuery()
@@ -106,7 +94,7 @@ object MysqlDao {
         ps.close()
       }
       if (conn != null) {
-        conn.close()
+       conn.close()
       }
     }
     fieldsList
@@ -120,15 +108,9 @@ object MysqlDao {
   def insertBatch(y: Iterator[ListBuffer[String]], tableName:String): Unit ={
     var conn: Connection = null
     var ps: PreparedStatement = null
-    val jdbcUrl = ConfigUtil.getConf.get.getString("tvtest_host")
-    val user = ConfigUtil.getConf.get.getString("tvtest_username")
-    val passwd = ConfigUtil.getConf.get.getString("tvtest_password")
-    val db = ConfigUtil.getConf.get.getString("tvtest_datebase")
-    val port = ConfigUtil.getConf.get.getString("tvtest_port")
 
     try{
-      Class.forName("com.mysql.jdbc.Driver")
-      conn = DriverManager.getConnection("jdbc:mysql://" + jdbcUrl + ":" + port + "/" + db, user, passwd)
+      conn = MysqlManager.getMysqlManager.getConnection
       conn.setAutoCommit(false)
       var arr = ArrayBuffer[String]()
       val fields = ReloadConfigManager.fields
@@ -200,15 +182,9 @@ object MysqlDao {
   def alterTable(tableName: String, field: String) = {
     var conn: Connection = null
     var ps: PreparedStatement = null
-    val jdbcUrl = ConfigUtil.getConf.get.getString("tvtest_host")
-    val user = ConfigUtil.getConf.get.getString("tvtest_username")
-    val passwd = ConfigUtil.getConf.get.getString("tvtest_password")
-    val db = ConfigUtil.getConf.get.getString("tvtest_datebase")
-    val port = ConfigUtil.getConf.get.getString("tvtest_port")
 
     try{
-      Class.forName("com.mysql.jdbc.Driver")
-      conn = DriverManager.getConnection("jdbc:mysql://" + jdbcUrl + ":" + port + "/" + db, user, passwd)
+      conn = MysqlManager.getMysqlManager.getConnection
       ps = conn.prepareStatement(alterSQL.format(tableName, field))
       ps.execute()
     }catch{

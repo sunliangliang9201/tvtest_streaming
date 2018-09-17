@@ -9,7 +9,6 @@ import org.apache.spark.streaming.kafka.KafkaUtils
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 import org.slf4j.LoggerFactory
 
-import scala.collection.mutable.ListBuffer
 
 /**
   * tvtest_streaming start main object, start the project and get the config for paralize compute.
