@@ -70,7 +70,6 @@ class SDKFormator extends LogFormator {
     }catch {
       case e: Exception => logger.error("fail to format log" + logStr, e)
     }
-    println(fieldValues)
     fieldValues
   }
 

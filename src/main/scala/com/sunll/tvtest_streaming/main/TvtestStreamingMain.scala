@@ -26,10 +26,10 @@ object TvtestStreamingMain {
     //初始化日志对象
     val logger = LoggerFactory.getLogger(this.getClass)
     //获取mysql配置
-//    val streamingKey = args(0)
+    val streamingKey = args(0)
 //    val streamingIntervalTime = Integer.parseInt(args(1))
-    val streamingKey = "TvTest"
-    val streamingIntervalTime = 10
+    //val streamingKey = "TvTest"
+    val streamingIntervalTime = 15
     val streamingKeyConfig = MysqlDao.findStreamingKeyConfig(streamingKey)
     if(null == streamingKeyConfig){
       logger.error("No streaming config found...")
