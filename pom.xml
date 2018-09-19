@@ -9,40 +9,29 @@
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-core -->
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-core_2.11</artifactId>
-            <version>1.6.1</version>
-        </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.scala-lang/scala-library -->
         <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
-            <version>2.11.8</version>
+            <version>2.10.5</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-core -->
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-core_2.11</artifactId>
+            <artifactId>spark-core_2.10</artifactId>
             <version>1.6.1</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-streaming -->
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-streaming_2.11</artifactId>
+            <artifactId>spark-streaming_2.10</artifactId>
             <version>1.6.1</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-streaming-kafka -->
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-streaming-kafka_2.11</artifactId>
-            <version>1.6.1</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-sql -->
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-sql_2.11</artifactId>
+            <artifactId>spark-streaming-kafka_2.10</artifactId>
             <version>1.6.1</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
@@ -63,34 +52,11 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.47</version>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/log4j/log4j -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <configuration>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                    <archive>
-                        <manifest>
-                            <mainClass>com.sunll.tvtest_streaming.main.TvtestStreamingMain</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>make-assembly</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-
 </project>

@@ -4,7 +4,7 @@ import com.typesafe.config.{ConfigFactory, Config}
 
 /**
   * get configuration from config properties
- *
+  *
   * @author sunliangliang 2018-09-15
   * @version 1.0
   */

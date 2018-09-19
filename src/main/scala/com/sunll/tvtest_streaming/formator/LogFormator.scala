@@ -1,8 +1,6 @@
 package com.sunll.tvtest_streaming.formator
 
-import org.apache.spark.sql.Row
-
-import scala.collection.mutable.ListBuffer
+import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 
 /**
   * the triat of formator, and the obstrct func format.
@@ -17,5 +15,6 @@ trait LogFormator extends Serializable{
     * @param logStr 原始日志
     * @return 结果
     */
-  def format(logStr: String): ListBuffer[String]
+  def format(logStr: String, buff: Array[String]): ListBuffer[String]
+
 }

@@ -4,10 +4,11 @@ import com.sunll.tvtest_streaming.formator.LogFormator
 import com.sunll.tvtest_streaming.storage.MysqlDao
 import com.sunll.tvtest_streaming.utils.{ConfigUtil, Constants, ReloadConfigManager}
 import kafka.serializer.StringDecoder
-import org.apache.spark.SparkConf
+import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.streaming.kafka.KafkaUtils
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 import org.slf4j.LoggerFactory
+import scala.collection.mutable.ArrayBuffer
 
 
 /**
@@ -26,9 +27,9 @@ object TvtestStreamingMain {
     //初始化日志对象
     val logger = LoggerFactory.getLogger(this.getClass)
     //获取mysql配置
-    val streamingKey = args(0)
-//    val streamingIntervalTime = Integer.parseInt(args(1))
-    //val streamingKey = "TvTest"
+    //val streamingKey = args(0)
+    //val streamingIntervalTime = Integer.parseInt(args(1))
+    val streamingKey = "TvTest"
     val streamingIntervalTime = 15
     val streamingKeyConfig = MysqlDao.findStreamingKeyConfig(streamingKey)
     if(null == streamingKeyConfig){
@@ -36,7 +37,15 @@ object TvtestStreamingMain {
       System.exit(-1)
     }
     logger.info("success load the config" + streamingKeyConfig)
-    val conf = new SparkConf().setAppName(streamingKeyConfig.appName).set("spark.driver.cores", streamingKeyConfig.driverCores).setMaster("local[2]")
+    val conf = new SparkConf().setAppName(streamingKeyConfig.appName).set("spark.driver.cores", streamingKeyConfig.driverCores)
+    //val conf = new SparkConf().setAppName(streamingKeyConfig.appName).set("spark.driver.cores", streamingKeyConfig.driverCores)
+    val sc = new SparkContext(conf)
+    val textFileRdd = sc.textFile("hdfs://192.168.5.31:9000/test/sunliangliang/ip_area_isp.txt")
+    var ipAreaIspCache: Array[String]  = textFileRdd.filter(x => {
+      x.stripMargin != null && x.stripMargin != ""
+    }).collect()
+    sc.stop()
+    println(ipAreaIspCache.length)
     val ssc = new StreamingContext(conf, Seconds(streamingIntervalTime))
     //更新mysql中result字段配置
     ReloadConfigManager.init(60*1000, streamingKey, streamingKeyConfig)
@@ -53,7 +62,7 @@ object TvtestStreamingMain {
     val logFormator = Class.forName(Constants.FORMATOR_PACACKE_PREFIX + streamingKeyConfig.formator).newInstance().asInstanceOf[LogFormator]
     //清洗入库
     kafakaDStream.map(x => {
-      logFormator.format(x._2)
+      logFormator.format(x._2, ipAreaIspCache)
     }).foreachRDD(x => x.foreachPartition(y => MysqlDao.insertBatch(y, streamingKeyConfig.tableName)))
     ssc.start()
     ssc.awaitTermination()
