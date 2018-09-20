@@ -28,9 +28,7 @@ class ReloadConfigManager extends Serializable {
     val thread = new Thread(){
       override def run(): Unit = {
         while(true){
-          println("上一次的fields" + fields)
           reloadFields(streamingKey)
-          println("下一次的fields" + fields)
           reloadTableandInsertSQL(streamingKey, streamingKeyConfig)
           Thread.sleep(flushTime)
         }
@@ -38,7 +36,6 @@ class ReloadConfigManager extends Serializable {
     }
     thread.setDaemon(true)
     thread.start()
-    println("线程启动！！！！")
   }
 
   /**

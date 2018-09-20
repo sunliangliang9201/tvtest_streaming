@@ -38,12 +38,9 @@ object TvtestStreamingMain {
     var ipAreaIspCache: Array[String]  = textFileRdd.filter(x => {
       x.stripMargin != null && x.stripMargin != ""
     }).collect()
-    println(ipAreaIspCache.length)
-    println("1 ip文件已经缓存")
     //更新mysql中result字段配置
     val reloadConfig = new ReloadConfigManager
     reloadConfig.init(60 * 1000, streamingKey, streamingKeyConfig)
-    println("需要的字段" + reloadConfig.fields)
     //kafka配置
     val kafkaParams: Map[String, String] = Map("metadata.broker.list" -> streamingKeyConfig.brolerList,
                                                 "group.id" -> streamingKeyConfig.groupID,
@@ -57,7 +54,6 @@ object TvtestStreamingMain {
     //关键点：通过清洗类清洗日志所有字段
     val logFormator = Class.forName(Constants.FORMATOR_PACACKE_PREFIX + streamingKeyConfig.formator).newInstance().asInstanceOf[LogFormator]
     //清洗入库
-    println("2 格式化日志对象已经初始化")
     kafakaDStream.map(x => {
       logFormator.format(x._2, ipAreaIspCache, reloadConfig.getFields)
     }).foreachRDD(x => x.foreachPartition(y => MysqlDao.insertBatch(y, streamingKeyConfig.tableName, reloadConfig.getInsertSQL(), reloadConfig.getFields)))
