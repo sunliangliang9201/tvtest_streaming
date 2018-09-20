@@ -25,9 +25,11 @@ class SDKFormator extends LogFormator {
     * @param logStr 原始log
     * @return 返回包含结果的list
     */
-  override def format(logStr: String, ipAreaIspCache: Array[String]): ListBuffer[String] = {
+  override def format(logStr: String, ipAreaIspCache: Array[String], fields: ListBuffer[(String, Int)]): ListBuffer[String] = {
     //不采用传入的引用，而是从主存中拿
-    val fields = ReloadConfigManager.fields
+    println("3 原始日志字符串为" + logStr)
+    println("4 获取的ip缓存数组长度为" + ipAreaIspCache.length)
+    println("5 需要获取的字段如下" + fields.mkString("-"))
     val fieldValues = ListBuffer.fill(fields.length)("-")
     var paramMap: mutable.Map[String, String] = mutable.Map[String, String]()
     try{
@@ -35,6 +37,7 @@ class SDKFormator extends LogFormator {
       val fieldsLogList = query.split("&").toList
       fieldsLogList.map(x => paramMap += x.split("=")(0) -> x.split("=")(1))
       val tup = IPParser.parse(ip, ipAreaIspCache)
+      println("6 ip解析结果为" + tup.toString())
       paramMap += "country" -> tup._1
       paramMap += "province" -> tup._2
       paramMap += "city" -> tup._3
@@ -66,7 +69,7 @@ class SDKFormator extends LogFormator {
     }catch {
       case e: Exception => logger.error("fail to format log" + logStr, e)
     }
-    println(fieldValues)
+    println("7 解析结果为" +fieldValues)
     fieldValues
   }
 

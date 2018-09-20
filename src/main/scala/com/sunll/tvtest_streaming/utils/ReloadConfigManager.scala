@@ -11,15 +11,11 @@ import scala.collection.mutable.ListBuffer
   * @author sunliangliang 2018-09-15
   * @version 1.0
   */
-object ReloadConfigManager {
+class ReloadConfigManager extends Serializable {
+  //注意：序列化的话，里面的类变量必须是可序列化的
+  @volatile var fields: ListBuffer[(String, Int)] = null
 
-  val logger = LoggerFactory.getLogger(this.getClass)
-
-  var thread: Thread = null
-
-  @volatile var fields: ListBuffer[(String, Int)] = new ListBuffer[(String, Int)]()
-
-  @volatile var insertSQL = ""
+  @volatile var insertSQL: String = ""
 
   /**
     * 启动一个线程，每个固定时间舒心配置，设置为守护进程
@@ -29,17 +25,20 @@ object ReloadConfigManager {
     */
   def init(flushTime: Int, streamingKey: String, streamingKeyConfig: StreamingKeyConfig)={
     fields = MysqlDao.findStreamingKeyFileldsConfig(streamingKey)
-    thread = new Thread(){
+    val thread = new Thread(){
       override def run(): Unit = {
         while(true){
+          println("上一次的fields" + fields)
           reloadFields(streamingKey)
+          println("下一次的fields" + fields)
           reloadTableandInsertSQL(streamingKey, streamingKeyConfig)
-          logger.info("success reload the fields config and reload result table and the insert sql " + fields)
           Thread.sleep(flushTime)
         }
       }
     }
-    start_thread()
+    thread.setDaemon(true)
+    thread.start()
+    println("线程启动！！！！")
   }
 
   /**
@@ -51,11 +50,11 @@ object ReloadConfigManager {
   }
 
   /**
-    * 设置守护进程并启动
+    * 返回insertsql
+    * @return insertsql
     */
-  def start_thread(): Unit ={
-    thread.setDaemon(true)
-    thread.start()
+  def getInsertSQL(): String ={
+    this.insertSQL
   }
 
   /**
@@ -78,6 +77,7 @@ object ReloadConfigManager {
     tmp += tmpList.mkString(",")
     tmp += ")"
     insertSQL = tmp
+    println("插入sql" + insertSQL)
     val res_fields = MysqlDao.descDestinationTable(streamingKeyConfig.tableName)
     if(res_fields.length - 1 != fields.length){
       for(i <- 0 until fields.length){

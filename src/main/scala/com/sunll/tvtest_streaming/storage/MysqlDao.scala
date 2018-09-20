@@ -105,19 +105,17 @@ object MysqlDao {
     * @param y 每个DStream的每个ADD的每个partition，所以是迭代器
     * @param tableName 目标table
     */
-  def insertBatch(y: Iterator[ListBuffer[String]], tableName:String): Unit ={
+  def insertBatch(y: Iterator[ListBuffer[String]], tableName:String, insertSQL: String, fields: ListBuffer[(String, Int)]): Unit ={
     var conn: Connection = null
     var ps: PreparedStatement = null
-
     try{
       conn = MysqlManager.getMysqlManager.getConnection
       conn.setAutoCommit(false)
       var arr = ArrayBuffer[String]()
-      val fields = ReloadConfigManager.fields
       for(i <- 0 until fields.length){
         arr += fields(i)._1
       }
-      ps = conn.prepareStatement(ReloadConfigManager.insertSQL.format(tableName, arr.mkString(",")))
+      ps = conn.prepareStatement(insertSQL.format(tableName, arr.mkString(",")))
       for(i <- y){
         for(j <- 1 to i.length){
           ps.setString(j, i(j-1))
@@ -161,7 +159,7 @@ object MysqlDao {
         res += rows.getString("COLUMN_NAME")
       }
     }catch{
-      case e:Exception => logger.error("insert into result error...")
+      case e:Exception => logger.error("desc table error...")
     }finally {
       if (ps != null) {
         ps.close()

@@ -21,13 +21,6 @@ object IPParser {
 
   var method: GetMethod = null
 
-//  val conf: Configuration = new Configuration
-//
-//  var fs: FileSystem = null
-//
-//  var hdfsInStream: FSDataInputStream = null
-//
-//  val path: String = "hdfs://103.26.158.33:9000/test/sunliangliang/ip_area_isp.txt"
   /**
     * 根据已有的ip_area_isp.txt来匹配ip
     * @param ip ip
@@ -84,38 +77,6 @@ object IPParser {
     }
     return -1
   }
-
-  /**
-    * 把ip_area_isp.txt缓存到ArrayBuffer中
-    * @return array
-    */
-//  def readIPAreaIsp(): ArrayBuffer[String] = {
-//    fs = FileSystem.get(URI.create(path), conf)
-//    hdfsInStream = fs.open(new Path(path))
-//    hdfsInStream.read
-//    var br: BufferedReader = null
-//    var s: String = null
-//    var flag = true
-//    var lines = ArrayBuffer[String]()
-//    try{
-//      br = new BufferedReader(new InputStreamReader(new FileInputStream(path)))
-//      while(flag){
-//        s = br.readLine()
-//        if(s != null){
-//          lines.append(s)
-//        }else{
-//          flag = false
-//        }
-//      }
-//    }catch{
-//      case e: Exception => logger.error("fail to load file " + path + e)
-//    }finally {
-//      if(br != null){
-//        br.close()
-//      }
-//    }
-//    lines
-//  }
 
   /**
     * 测试main

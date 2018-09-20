@@ -15,6 +15,6 @@ trait LogFormator extends Serializable{
     * @param logStr 原始日志
     * @return 结果
     */
-  def format(logStr: String, buff: Array[String]): ListBuffer[String]
+  def format(logStr: String, buff: Array[String], fields: ListBuffer[(String, Int)]): ListBuffer[String]
 
 }
