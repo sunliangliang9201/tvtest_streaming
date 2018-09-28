@@ -1,4 +1,4 @@
-package com.sunll.offsets.test
+package com.sunll.tvtest_streaming2.test
 
 import kafka.serializer.StringDecoder
 import org.apache.spark.SparkConf
