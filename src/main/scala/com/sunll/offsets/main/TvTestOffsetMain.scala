@@ -1,22 +1,16 @@
-package com.sunll.tvtest_streaming.test
+package com.sunll.offsets.main
 
 import kafka.serializer.StringDecoder
 import org.apache.spark.SparkConf
-import org.apache.spark.streaming.kafka.{KafkaCluster, KafkaUtils}
-import org.apache.spark.streaming.{Duration, Seconds, StreamingContext}
+import org.apache.spark.streaming.kafka.KafkaUtils
+import org.apache.spark.streaming.{Seconds, StreamingContext}
 
 /**
-  * 测试checkpoint，可以做到任务中断不丢失数据（很小可能丢失，会存在小可能的重复）
+  * 虽然Direct的方式可以保证精确一次的消费数据，但是如果出现问题如中断程序，断电等问题，就都得用到checkpoint，但是checkpoint
+  * 自身也存在局限，所以最好是自己管理offsets
   */
-object testsc2 {
+object TvTestOffsetMain {
   def main(args: Array[String]): Unit = {
-    val checkpoint = "e:/checkpoint"
-    val ssc = StreamingContext.getOrCreate(checkpoint, createContext)
-    ssc.start()
-    ssc.awaitTermination()
-  }
-
-  def createContext(): StreamingContext ={
     val conf = new SparkConf().setAppName("test").setMaster("local[*]")
     val ssc = new StreamingContext(conf, Seconds(4))
     val kafkaParams: Map[String, String] = Map("metadata.broker.list" -> "103.26.158.194:9092,103.26.158.195:9092,103.26.158.196:9092,103.26.158.197:9092,103.26.158.198:9092,103.26.158.199:9092,103.26.158.200:9092",
@@ -24,9 +18,11 @@ object testsc2 {
       "zookeeper.connect" -> "103.26.158.64:2181,103.26.158.65:2181,103.26.158.66:2181",
       "auto.offset.reset" -> "largest")
     val kafkaStream = KafkaUtils.createDirectStream[String, String, StringDecoder, StringDecoder](ssc, kafkaParams, Set("tvtest.sunliangliang"))
-    ssc.checkpoint("e:/checkpoint")
-    kafkaStream.foreachRDD(rdd => rdd.checkpoint())
-    kafkaStream.map(_._2).print()
-    ssc
+    kafkaStream.foreachRDD(rdd => {
+      rdd.map(_._2)
+    })
+    ssc.start()
+    ssc.awaitTermination()
+    ssc.stop()
   }
 }
