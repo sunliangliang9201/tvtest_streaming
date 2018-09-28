@@ -31,3 +31,4 @@ while 1:
         print ltpye
     except Exception as e:
         print e
+

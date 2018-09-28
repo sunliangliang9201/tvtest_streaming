@@ -3,7 +3,7 @@ package com.sunll.tvtest_streaming.storage
 import java.sql.{Connection, DriverManager, PreparedStatement}
 
 import com.sunll.tvtest_streaming.model.StreamingKeyConfig
-import com.sunll.tvtest_streaming.utils.{ConfigUtil, ReloadConfigManager}
+import com.sunll.tvtest_streaming.utils.ConfigUtil
 import org.slf4j.LoggerFactory
 
 import scala.collection.mutable.{ArrayBuffer, ListBuffer}
