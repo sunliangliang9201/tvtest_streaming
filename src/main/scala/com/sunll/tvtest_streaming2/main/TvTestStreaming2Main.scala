@@ -1,5 +1,6 @@
 package com.sunll.tvtest_streaming2.main
 
+import com.sunll.tvtest_streaming2.storage.MySQLDao
 import org.apache.spark.SparkConf
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 
@@ -18,7 +19,12 @@ object TvTestStreaming2Main {
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("Offset").setMaster("local[*]")
     val ssc = new StreamingContext(conf, Seconds(4))
-
+    val streamingKey = "TvTest2"
+    val streamingKeyConfig = MySQLDao.getStreamingConfig(streamingKey)
+    if(streamingKeyConfig == null){
+      println("no streaming key find")
+      System.exit(1)
+    }
 
     ssc.start()
     ssc.awaitTermination()

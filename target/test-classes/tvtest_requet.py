@@ -16,15 +16,7 @@ while 1:
     params = {'enc': '0',
               'appkey': 'tvtest',
               'ltype': ltpye,
-              'log': '{"uuid":"00001123a3-ffff-ffffe7763000","imei":"androidId01000000be03ddeb",'
-                     '"uid":"androidId00000000be03ddeb","userid":"-","ctp":"android",'
-                     '"androidid":"00000000be03ddeb","mac":"00:00:00:00:00:00",'
-                     '"mtype":"BAOFENG_TV MST_6A358","mos":"4.4.4","ver":"3.1.1.778","gid":"dev",'
-                     '"unet":"0","itime":"2018-09-16 13:34:36","value":{"sn":"60000AM3M00G18561699_95D9",'
-                                                '"t":"fui_usercenter",'
-                                                '"patch_id":"-","r":"r153416368761800000208",'
-                                                '"itime":"2018-09-16 13:34:36","userid":"",'
-                                                                '"app_id":"fui_usercenter","usertype":"GUEST","llal":"0","ip":"0.0.0.0"}}',
+              'log': '{"androidid":"000000002b3db3fb","unet":"3","mos":"5.1.1","mac":"2c:d9:74:04:08:d2","uuid":"00000000-1442-390e-ffff-ffffd545a83b","userid":"-","mtype":"BAOFENG_TV AML_T962","lau_ver":"4.0.4.1612","gid":"dev","imei":"000000002113131","itime":"2018-10-12 13:23:38","version":"3.0","uid":"000000002113131","value":{"pid":"heart","sn":"60000AM1F00D17CK0021_3F51","plt_ver":"V4.0.43","ip":"123.126.114.194","page_title":"com.bftv.fui.launcher.views.activity.IndexRootActivity","softid":"11173101","plt":"AML_T962","package_name":"com.kuyun.common.androidtv"},"apptoken":"282340ce12c5e10fa84171660a2054f8","ver":"3.0.9.368"}',
               }
     try:
         res = requests.get(base_url, params=params)

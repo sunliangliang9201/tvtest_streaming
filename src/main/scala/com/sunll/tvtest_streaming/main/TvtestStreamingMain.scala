@@ -24,7 +24,8 @@ object TvtestStreamingMain {
   def main(args: Array[String]): Unit = {
     val logger = LoggerFactory.getLogger(this.getClass)
     val streamingKey = args(0)
-    val streamingIntervalTime = 15
+    //val streamingKey = "tv_test"
+    val streamingIntervalTime = 5
     val streamingKeyConfig = MysqlDao.findStreamingKeyConfig(streamingKey)
     if(null == streamingKeyConfig){
       logger.error("No streaming config found...")
@@ -32,9 +33,11 @@ object TvtestStreamingMain {
     }
     logger.info("success load the config" + streamingKeyConfig)
     val conf = new SparkConf().setAppName(streamingKeyConfig.appName).set("spark.driver.cores", streamingKeyConfig.driverCores)
+    //val conf = new SparkConf().setAppName(streamingKeyConfig.appName).setMaster("local[*]")
     val ssc = new StreamingContext(conf, Seconds(streamingIntervalTime))
     val sc = ssc.sparkContext
     val textFileRdd = sc.textFile("hdfs://192.168.5.31:9000/test/sunliangliang/ip_area_isp.txt")
+    //val textFileRdd = sc.textFile("e:/ip_area_isp.txt")
     var ipAreaIspCache: Array[String]  = textFileRdd.filter(x => {
       x.stripMargin != null && x.stripMargin != ""
     }).collect()

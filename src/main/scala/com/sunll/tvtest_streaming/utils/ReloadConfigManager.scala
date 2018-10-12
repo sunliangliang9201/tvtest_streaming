@@ -74,7 +74,6 @@ class ReloadConfigManager extends Serializable {
     tmp += tmpList.mkString(",")
     tmp += ")"
     insertSQL = tmp
-    println("插入sql" + insertSQL)
     val res_fields = MysqlDao.descDestinationTable(streamingKeyConfig.tableName)
     if(res_fields.length - 1 != fields.length){
       for(i <- 0 until fields.length){

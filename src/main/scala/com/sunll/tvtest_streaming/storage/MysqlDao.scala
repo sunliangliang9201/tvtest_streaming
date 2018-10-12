@@ -180,13 +180,12 @@ object MysqlDao {
   def alterTable(tableName: String, field: String) = {
     var conn: Connection = null
     var ps: PreparedStatement = null
-
     try{
       conn = MysqlManager.getMysqlManager.getConnection
       ps = conn.prepareStatement(alterSQL.format(tableName, field))
       ps.execute()
     }catch{
-      case e:Exception => logger.error("fail to alter result table..." + e)
+      case e:Exception =>
     }finally {
       if (ps != null) {
         ps.close()

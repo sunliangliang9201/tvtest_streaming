@@ -45,24 +45,29 @@ class SDKFormator extends LogFormator {
       val allJson = JSON.parseObject(paramMap("log"))
       val time = allJson.get("itime").toString
       for(i <- 0 until fields.length){
-        val field = fields(i)
-        field._1 match {
-          case "country" => fieldValues(field._2) = paramMap.getOrElse("country", "-")
-          case "province" => fieldValues(field._2) = paramMap.getOrElse("province", "-")
-          case "city" => fieldValues(field._2) = paramMap.getOrElse("city", "-")
-          case "isp" => fieldValues(field._2) = paramMap.getOrElse("isp", "-")
-          case "appkey" => fieldValues(field._2) = paramMap.getOrElse("appkey", "-")
-          case "ltype" => fieldValues(field._2) = paramMap.getOrElse("ltype", "-")
-          case "value" => fieldValues(field._2) = allJson.get("value").toString
-          case "dt" => fieldValues(field._2) = time.split(" ")(0)
-          case "hour" => fieldValues(field._2) = time.split(" ")(1).split(":")(0)
-          case "mins" => fieldValues(field._2) = time.split(" ")(1).split(":")(1)
-          case _ => fieldValues(field._2) = get2Json(allJson, field._1)
+        try{
+          val field = fields(i)
+          field._1 match {
+            case "country" => fieldValues(field._2) = paramMap.getOrElse("country", "-")
+            case "province" => fieldValues(field._2) = paramMap.getOrElse("province", "-")
+            case "city" => fieldValues(field._2) = paramMap.getOrElse("city", "-")
+            case "isp" => fieldValues(field._2) = paramMap.getOrElse("isp", "-")
+            case "appkey" => fieldValues(field._2) = paramMap.getOrElse("appkey", "-")
+            case "ltype" => fieldValues(field._2) = paramMap.getOrElse("ltype", "-")
+            case "value" => fieldValues(field._2) = allJson.get("value").toString
+            case "dt" => fieldValues(field._2) = time.split(" ")(0)
+            case "hour" => fieldValues(field._2) = time.split(" ")(1).split(":")(0)
+            case "mins" => fieldValues(field._2) = time.split(" ")(1).split(":")(1)
+            case _ => fieldValues(field._2) = get2Json(allJson, field._1)
+          }
+        }catch {
+          case e: Exception => logger.error("fail to find the field", e)
         }
       }
     }catch {
       case e: Exception => logger.error("fail to format log" + logStr, e)
     }
+    println(fieldValues)
     fieldValues
   }
 
@@ -81,7 +86,6 @@ class SDKFormator extends LogFormator {
     }
     return res
   }
-
 }
 
 /**
