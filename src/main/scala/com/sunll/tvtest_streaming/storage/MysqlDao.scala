@@ -6,7 +6,7 @@ import com.sunll.tvtest_streaming.model.StreamingKeyConfig
 import com.sunll.tvtest_streaming.utils.ConfigUtil
 import org.slf4j.LoggerFactory
 
-import scala.collection.mutable.{ArrayBuffer, ListBuffer}
+import scala.collection.mutable.{ArrayBuffer, ListBuffer, Map}
 
 /**
   * mysql funcs object
@@ -101,13 +101,14 @@ object MysqlDao {
   }
 
   /**
-    * 批量插入结果
+    * 批量插入结果，根据appkey插入不同的结果表
     * @param y 每个DStream的每个ADD的每个partition，所以是迭代器
     * @param tableName 目标table
     */
-  def insertBatch(y: Iterator[ListBuffer[String]], tableName:String, insertSQL: String, fields: ListBuffer[(String, Int)]): Unit ={
+  def insertBatch(y: Iterator[(String, ListBuffer[String])], tableName:String, insertSQL: String, fields: ListBuffer[(String, Int)]): Unit ={
     var conn: Connection = null
     var ps: PreparedStatement = null
+    val tableMap = scala.collection.mutable.Map[String, PreparedStatement]()
     try{
       conn = MysqlManager.getMysqlManager.getConnection
       conn.setAutoCommit(false)
@@ -117,13 +118,23 @@ object MysqlDao {
       }
       ps = conn.prepareStatement(insertSQL.format(tableName, arr.mkString(",")))
       for(i <- y){
-        for(j <- 1 to i.length){
-          ps.setString(j, i(j-1))
+        if (i._1 != "-" &&  !tableMap.contains(i._1)){
+          tableMap(i._1) = conn.prepareStatement(insertSQL.format(tableName + "." + i._1 + "_" + "stat", arr.mkString(",")))
+          for(j <- 1 to i._2.length){
+            tableMap(i._1).setString(j, i._2(j-1))
+          }
+          tableMap(i._1).addBatch()
+        }else{
+          for(j <- 1 to i._2.length){
+            tableMap(i._1).setString(j, i._2(j-1))
+          }
+          tableMap(i._1).addBatch()
         }
-        ps.addBatch()
       }
-      ps.executeBatch()
-      conn.commit()
+      for(i <- tableMap.values){
+        i.executeBatch()
+        conn.commit()
+      }
     }catch{
       case e:Exception => logger.error("insert into result error..." + e)
     }finally {

@@ -54,8 +54,8 @@ public class TestPost {
 
                 result = sbf.toString();
             }
-
-        } catch (IOException e) {
+        } catch (IOException e
+                ) {
             e.printStackTrace();
         } finally {
             // 关闭资源

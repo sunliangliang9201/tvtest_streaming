@@ -23,10 +23,11 @@ class SDKFormator extends LogFormator {
     * @param logStr 原始log
     * @return 返回包含结果的list
     */
-  override def format(logStr: String, ipAreaIspCache: Array[String], fields: ListBuffer[(String, Int)]): ListBuffer[String] = {
+  override def format(logStr: String, ipAreaIspCache: Array[String], fields: ListBuffer[(String, Int)]): (String, ListBuffer[String]) = {
     //不采用传入的引用，而是从主存中拿
     val fieldValues = ListBuffer.fill(fields.length)("-")
     var paramMap: mutable.Map[String, String] = mutable.Map[String, String]()
+    var appkey = "-"
     try{
       val logRegex(ip, query) = logStr
       val fieldsLogList = query.split("&").toList
@@ -44,6 +45,7 @@ class SDKFormator extends LogFormator {
       }
       val allJson = JSON.parseObject(paramMap("log"))
       val time = allJson.get("itime").toString
+      appkey = paramMap.getOrElse("appkey", "-")
       for(i <- 0 until fields.length){
         try{
           val field = fields(i)
@@ -67,8 +69,8 @@ class SDKFormator extends LogFormator {
     }catch {
       case e: Exception => logger.error("fail to format log" + logStr, e)
     }
-    println(fieldValues)
-    fieldValues
+    println((appkey, fieldValues))
+    (appkey, fieldValues)
   }
 
   /**

@@ -24,7 +24,7 @@ object TvtestStreamingMain {
   def main(args: Array[String]): Unit = {
     val logger = LoggerFactory.getLogger(this.getClass)
     val streamingKey = args(0)
-    //val streamingKey = "tv_test"
+    //val streamingKey = "TvTest"
     val streamingIntervalTime = 5
     val streamingKeyConfig = MysqlDao.findStreamingKeyConfig(streamingKey)
     if(null == streamingKeyConfig){
