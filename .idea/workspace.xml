@@ -6,20 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8177c12-07f6-46e1-bc70-b5a464a91048" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/tvtest_streaming_jar.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/tvtest_streaming_jar.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming/formator/LogFormator.scala" afterPath="$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming/formator/LogFormator.scala" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming/formator/SDKFormator.scala" afterPath="$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming/formator/SDKFormator.scala" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming/main/TvtestStreamingMain.scala" afterPath="$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming/main/TvtestStreamingMain.scala" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming/storage/MysqlDao.scala" afterPath="$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming/storage/MysqlDao.scala" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming/utils/ReloadConfigManager.scala" afterPath="$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming/utils/ReloadConfigManager.scala" />
-      <change beforePath="$PROJECT_DIR$/src/test/scala/tvtest_requet.py" afterPath="$PROJECT_DIR$/src/test/scala/tvtest_requet.py" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" afterPath="$PROJECT_DIR$/target/classes/application.properties" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/tvtest_requet.py" afterPath="$PROJECT_DIR$/target/test-classes/tvtest_requet.py" />
-    </list>
+    <list default="true" id="f8177c12-07f6-46e1-bc70-b5a464a91048" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,7 +27,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming/main/TvtestStreamingMain.scala">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="125">
-              <caret line="8" column="24" lean-forward="true" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+              <caret line="8" column="24" lean-forward="false" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -49,8 +36,8 @@
       <file leaf-file-name="tvtest_requet.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/scala/tvtest_requet.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="15" column="25" lean-forward="true" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
+            <state relative-caret-position="180">
+              <caret line="12" column="55" lean-forward="true" selection-start-line="12" selection-start-column="55" selection-end-line="12" selection-end-column="55" />
               <folding />
             </state>
           </provider>
@@ -284,24 +271,6 @@
             <path>
               <item name="tvtest_streaming" type="b2602c69:ProjectViewProjectNode" />
               <item name="tvtest_streaming" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tvtest_streaming" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tvtest_streaming" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tvtest_streaming" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tvtest_streaming" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tvtest_streaming" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tvtest_streaming" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
-              <item name="tvtest_streaming_jar" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="tvtest_streaming" type="b2602c69:ProjectViewProjectNode" />
@@ -644,9 +613,9 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34864864" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34864864" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32837838" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19864865" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.49864864" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="FAQ Robot" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21633238" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1064,15 +1033,15 @@
     <entry file="file://$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming/main/TvtestStreamingMain.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="125">
-          <caret line="8" column="24" lean-forward="true" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+          <caret line="8" column="24" lean-forward="false" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/scala/tvtest_requet.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="15" column="25" lean-forward="true" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
+        <state relative-caret-position="180">
+          <caret line="12" column="55" lean-forward="true" selection-start-line="12" selection-start-column="55" selection-end-line="12" selection-end-column="55" />
           <folding />
         </state>
       </provider>
