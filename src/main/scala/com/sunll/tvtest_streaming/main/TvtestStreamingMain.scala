@@ -25,7 +25,7 @@ object TvtestStreamingMain {
     val logger = LoggerFactory.getLogger(this.getClass)
     val streamingKey = args(0)
     //val streamingKey = "TvTest"
-    val streamingIntervalTime = 5
+    val streamingIntervalTime = 30
     val streamingKeyConfig = MysqlDao.findStreamingKeyConfig(streamingKey)
     if(null == streamingKeyConfig){
       logger.error("No streaming config found...")
@@ -43,7 +43,7 @@ object TvtestStreamingMain {
     }).collect()
     //更新mysql中result字段配置
     val reloadConfig = new ReloadConfigManager
-    reloadConfig.init(60 * 1000, streamingKey, streamingKeyConfig)
+    reloadConfig.init(60 * 1000 * 3, streamingKey, streamingKeyConfig)
     //kafka配置
     val kafkaParams: Map[String, String] = Map("metadata.broker.list" -> streamingKeyConfig.brolerList,
                                                 "group.id" -> streamingKeyConfig.groupID,

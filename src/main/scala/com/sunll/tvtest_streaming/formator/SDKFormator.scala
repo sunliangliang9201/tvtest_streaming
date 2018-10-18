@@ -1,10 +1,12 @@
 package com.sunll.tvtest_streaming.formator
 import java.net.URLDecoder
+
 import com.alibaba.fastjson.{JSON, JSONObject}
 import com.sunll.tvtest_streaming.utils.{IPParser, SDKDecoder}
 import org.slf4j.LoggerFactory
+
 import scala.collection.mutable
-import scala.collection.mutable. ListBuffer
+import scala.collection.mutable.{ListBuffer, Map}
 
 /**
   * format the log string on all fields, then match we need
@@ -23,9 +25,8 @@ class SDKFormator extends LogFormator {
     * @param logStr 原始log
     * @return 返回包含结果的list
     */
-  override def format(logStr: String, ipAreaIspCache: Array[String], fields: ListBuffer[(String, Int)]): (String, ListBuffer[String]) = {
+  override def format(logStr: String, ipAreaIspCache: Array[String], fieldsMap: Map[String, ListBuffer[(String, Int)]]): (String, ListBuffer[String]) = {
     //不采用传入的引用，而是从主存中拿
-    val fieldValues = ListBuffer.fill(fields.length)("-")
     var paramMap: mutable.Map[String, String] = mutable.Map[String, String]()
     var appkey = "-"
     try{
@@ -46,31 +47,36 @@ class SDKFormator extends LogFormator {
       val allJson = JSON.parseObject(paramMap("log"))
       val time = allJson.get("itime").toString
       appkey = paramMap.getOrElse("appkey", "-")
-      for(i <- 0 until fields.length){
-        try{
-          val field = fields(i)
-          field._1 match {
-            case "country" => fieldValues(field._2) = paramMap.getOrElse("country", "-")
-            case "province" => fieldValues(field._2) = paramMap.getOrElse("province", "-")
-            case "city" => fieldValues(field._2) = paramMap.getOrElse("city", "-")
-            case "isp" => fieldValues(field._2) = paramMap.getOrElse("isp", "-")
-            case "appkey" => fieldValues(field._2) = paramMap.getOrElse("appkey", "-")
-            case "ltype" => fieldValues(field._2) = paramMap.getOrElse("ltype", "-")
-            case "value" => fieldValues(field._2) = allJson.get("value").toString
-            case "dt" => fieldValues(field._2) = time.split(" ")(0)
-            case "hour" => fieldValues(field._2) = time.split(" ")(1).split(":")(0)
-            case "mins" => fieldValues(field._2) = time.split(" ")(1).split(":")(1)
-            case _ => fieldValues(field._2) = get2Json(allJson, field._1)
+      if(appkey != "-"){
+        val appkeyList = fieldsMap(appkey)
+        val fieldValues = ListBuffer.fill(appkeyList.length)("-")
+        for(i <- 0 until appkeyList.length){
+          try{
+            val field = appkeyList(i)
+            field._1 match {
+              case "country" => fieldValues(field._2) = paramMap.getOrElse("country", "-")
+              case "province" => fieldValues(field._2) = paramMap.getOrElse("province", "-")
+              case "city" => fieldValues(field._2) = paramMap.getOrElse("city", "-")
+              case "isp" => fieldValues(field._2) = paramMap.getOrElse("isp", "-")
+              case "appkey" => fieldValues(field._2) = paramMap.getOrElse("appkey", "-")
+              case "ltype" => fieldValues(field._2) = paramMap.getOrElse("ltype", "-")
+              case "value" => fieldValues(field._2) = allJson.get("value").toString
+              case "dt" => fieldValues(field._2) = time.split(" ")(0)
+              case "hour" => fieldValues(field._2) = time.split(" ")(1).split(":")(0)
+              case "mins" => fieldValues(field._2) = time.split(" ")(1).split(":")(1)
+              case _ => fieldValues(field._2) = get2Json(allJson, field._1)
+            }
+          }catch {
+            case e: Exception => logger.error("fail to find the field", e)
           }
-        }catch {
-          case e: Exception => logger.error("fail to find the field", e)
         }
+        println((appkey, fieldValues))
+        return (appkey, fieldValues)
       }
     }catch {
       case e: Exception => logger.error("fail to format log" + logStr, e)
     }
-    println((appkey, fieldValues))
-    (appkey, fieldValues)
+    (appkey, new ListBuffer[String])
   }
 
   /**

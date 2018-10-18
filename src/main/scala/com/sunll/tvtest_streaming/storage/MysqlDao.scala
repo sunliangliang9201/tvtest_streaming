@@ -19,7 +19,7 @@ object MysqlDao {
 
   val streamingSQL = "select streaming_key, app_name, driver_cores, formator, topics, group_id, table_name, fields, broker_list from realtime_streaming_config where streaming_key = ?"
 
-  val configSQL = "select field,turn from tvtest_streaming_fields where enabled = 1 and streaming_key = ? order by turn"
+  val configSQL = "select appkey,field,turn from tvtest_streaming_fields where enabled = 1 and streaming_key = ? order by turn"
 
   val descSQL = "select COLUMN_NAME from information_schema.COLUMNS where table_name = ? and table_schema = 'tvtest_streaming';"
 
@@ -70,12 +70,12 @@ object MysqlDao {
   }
 
   /**
-    * 获取需要的字段
+    * 获取需要的字段，根据appkey区分，防区map中
     * @param streamingKey 任务唯一标示
     * @return 返回这些需要的字段keys，并携带顺序turn
     */
-  def findStreamingKeyFileldsConfig(streamingKey: String): ListBuffer[(String, Int)] ={
-    val fieldsList: ListBuffer[(String,Int)] = new ListBuffer[(String, Int)]()
+  def findStreamingKeyFileldsConfig(streamingKey: String): Map[String, ListBuffer[(String, Int)]] ={
+    val fieldsMap: Map[String, ListBuffer[(String, Int)]] = Map[String, ListBuffer[(String, Int)]]()
     var conn: Connection = null
     var ps: PreparedStatement = null
 
@@ -85,7 +85,12 @@ object MysqlDao {
       ps.setString(1, streamingKey)
       val res = ps.executeQuery()
       while(res.next()){
-        fieldsList.append((res.getString("field"), res.getInt("turn")))
+        if(fieldsMap.contains(res.getString("appkey"))){
+          fieldsMap(res.getString("appkey")).append((res.getString("field"), res.getInt("turn")))
+        }else{
+          fieldsMap(res.getString("appkey")) = ListBuffer()
+          fieldsMap(res.getString("appkey")).append((res.getString("field"), res.getInt("turn")))
+        }
       }
     }catch{
       case e:Exception => logger.error("findStreamingKeyFileldsConfig error..." + e)
@@ -97,7 +102,7 @@ object MysqlDao {
        conn.close()
       }
     }
-    fieldsList
+    fieldsMap
   }
 
   /**
@@ -105,21 +110,22 @@ object MysqlDao {
     * @param y 每个DStream的每个ADD的每个partition，所以是迭代器
     * @param tableName 目标table
     */
-  def insertBatch(y: Iterator[(String, ListBuffer[String])], tableName:String, insertSQL: String, fields: ListBuffer[(String, Int)]): Unit ={
+  def insertBatch(y: Iterator[(String, ListBuffer[String])], tableName:String, insertSQL: Map[String, String], fieldsMap: Map[String, ListBuffer[(String, Int)]]): Unit ={
     var conn: Connection = null
     var ps: PreparedStatement = null
     val tableMap = scala.collection.mutable.Map[String, PreparedStatement]()
     try{
       conn = MysqlManager.getMysqlManager.getConnection
       conn.setAutoCommit(false)
-      var arr = ArrayBuffer[String]()
-      for(i <- 0 until fields.length){
-        arr += fields(i)._1
-      }
-      ps = conn.prepareStatement(insertSQL.format(tableName, arr.mkString(",")))
+
+      //ps = conn.prepareStatement(insertSQL.format(tableName, arr.mkString(",")))
       for(i <- y){
+        var arr = ArrayBuffer[String]()
+        for(j <- 0 until fieldsMap(i._1).length){
+          arr += fieldsMap(i._1)(j)._1
+        }
         if (i._1 != "-" &&  !tableMap.contains(i._1)){
-          tableMap(i._1) = conn.prepareStatement(insertSQL.format(tableName + "." + i._1 + "_" + "stat", arr.mkString(",")))
+          tableMap(i._1) = conn.prepareStatement(insertSQL(i._1).format(tableName + "." + i._1 + "_" + "stat", arr.mkString(",")))
           for(j <- 1 to i._2.length){
             tableMap(i._1).setString(j, i._2(j-1))
           }
@@ -138,8 +144,9 @@ object MysqlDao {
     }catch{
       case e:Exception => logger.error("insert into result error..." + e)
     }finally {
-      if (ps != null) {
-        ps.close()
+      for(i <- tableMap.values){
+        if(i != null)
+        i.close()
       }
       if (conn != null) {
         conn.close()
@@ -148,7 +155,7 @@ object MysqlDao {
   }
 
   /**
-    *
+    *用来动态修改结果表表结构的函数
     */
   def descDestinationTable(table: String): ArrayBuffer[String] ={
     var res = new ArrayBuffer[String]()
