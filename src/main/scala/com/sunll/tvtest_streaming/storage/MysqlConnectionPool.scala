@@ -22,10 +22,11 @@ class MysqlConnectionPool extends Serializable {
     cpds.setDriverClass("com.mysql.jdbc.Driver")
     cpds.setUser(user)
     cpds.setPassword(passwd)
-    cpds.setMaxPoolSize(200)
-    cpds.setMinPoolSize(3)
-    cpds.setAcquireIncrement(5)
-    cpds.setMaxStatements(180)
+    cpds.setMaxPoolSize(10)
+    cpds.setMinPoolSize(1)
+    cpds.setAcquireIncrement(1)
+    cpds.setMaxStatements(100)
+    cpds.setInitialPoolSize(1)
   } catch {
     case e: Exception => e.printStackTrace()
   }
