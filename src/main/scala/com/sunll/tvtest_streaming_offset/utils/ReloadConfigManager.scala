@@ -1,13 +1,13 @@
-package com.sunll.tvtest_streaming.utils
+package com.sunll.tvtest_streaming_offset.utils
 
-import com.sunll.tvtest_streaming.model.StreamingKeyConfig
-import com.sunll.tvtest_streaming.storage.MysqlDao
+import com.sunll.tvtest_streaming_offset.model.StreamingKeyConfig
+import com.sunll.tvtest_streaming_offset.storage.MysqlDao
 import scala.collection.mutable.{ListBuffer, Map}
 
 /**
   * flush the config in mysql
-  * @author sunliangliang 2018-09-15
-  * @version 1.0
+  * @author sunliangliang 2018-10-19
+  * @version 2.0
   */
 class ReloadConfigManager extends Serializable {
   //注意：序列化的话，里面的类变量必须是可序列化的

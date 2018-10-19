@@ -1,11 +1,11 @@
-package com.sunll.tvtest_streaming.formator
+package com.sunll.tvtest_streaming_offset.formator
 
 import scala.collection.mutable.{ListBuffer, Map}
 
 /**
   * the triat of formator, and the obstrct func format.
-  * @author sunliangliang 2018-09-17
-  * @version 1.0
+  * @author sunliangliang 2018-10-19
+  * @version 2.0
   *
   */
 

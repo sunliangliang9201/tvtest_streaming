@@ -1,8 +1,8 @@
-package com.sunll.tvtest_streaming.main
+package com.sunll.tvtest_streaming_offset.main
 
-import com.sunll.tvtest_streaming.formator.LogFormator
-import com.sunll.tvtest_streaming.storage.MysqlDao
-import com.sunll.tvtest_streaming.utils.{ConfigUtil, Constants, ReloadConfigManager}
+import com.sunll.tvtest_streaming_offset.formator.LogFormator
+import com.sunll.tvtest_streaming_offset.storage.MysqlDao
+import com.sunll.tvtest_streaming_offset.utils.{ConfigUtil, Constants, ReloadConfigManager}
 import kafka.serializer.StringDecoder
 import org.apache.spark.SparkConf
 import org.apache.spark.streaming.kafka.KafkaUtils
@@ -12,8 +12,8 @@ import org.slf4j.LoggerFactory
 
 /**
   * tvtest_streaming start main object, start the project and get the config for paralize compute.
-  * @author sunliangliang 2018-09-10 https://github.com/sunliangliang9201/tvtest_streaming
-  * @version 1.0
+  * @author sunliangliang 2018-10-19 https://github.com/sunliangliang9201/tvtest_streaming
+  * @version 2.0
   * tpoic tvtest.sunliangliang
   * consumer-group group-bftv-tvtest
   * result country,province,isp,ltype,uuid,imei,mac,mtype,gid,mos,ver,unet,itime,value,mins,dt,hour

@@ -1,4 +1,4 @@
-package com.sunll.tvtest_streaming.utils
+package com.sunll.tvtest_streaming_offset.utils
 
 import org.apache.commons.httpclient.HttpClient
 import org.apache.commons.httpclient.methods.GetMethod
@@ -8,8 +8,8 @@ import org.slf4j.LoggerFactory
 /**
   * parse ip to country, province, city, isp
   *
-  * @author sunliangliang 2018-09-17
-  * @version 1.0
+  * @author sunliangliang 2018-10-19
+  * @version 2.0
   *
   */
 

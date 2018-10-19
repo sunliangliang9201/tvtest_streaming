@@ -1,9 +1,9 @@
-package com.sunll.tvtest_streaming.utils
+package com.sunll.tvtest_streaming_offset.utils
 
 /**
   * constants
-  * @author sunliangliang 2018-09-15
-  * @version 1.0
+  * @author sunliangliang 2018-10-19
+  * @version 2.0
   */
 object Constants {
 

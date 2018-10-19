@@ -1,14 +1,15 @@
-package com.sunll.tvtest_streaming.storage
+package com.sunll.tvtest_streaming_offset.storage
 
 import java.sql.Connection
+
 import com.mchange.v2.c3p0.ComboPooledDataSource
-import com.sunll.tvtest_streaming.utils.ConfigUtil
+import com.sunll.tvtest_streaming_offset.utils.ConfigUtil
 
 /**
   * mysql connections pool util
   *
-  * @author sunliangliang 2018-09-15
-  * @version 1.0
+  * @author sunliangliang 2018-10-19
+  * @version 2.0
   */
 class MysqlConnectionPool extends Serializable {
   private val cpds: ComboPooledDataSource = new ComboPooledDataSource(true)

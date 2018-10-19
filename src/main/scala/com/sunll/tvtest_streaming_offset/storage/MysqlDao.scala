@@ -1,17 +1,14 @@
-package com.sunll.tvtest_streaming.storage
+package com.sunll.tvtest_streaming_offset.storage
 
 import java.sql.{Connection, DriverManager, PreparedStatement}
-
-import com.sunll.tvtest_streaming.model.StreamingKeyConfig
-import com.sunll.tvtest_streaming.utils.ConfigUtil
+import com.sunll.tvtest_streaming_offset.model.StreamingKeyConfig
 import org.slf4j.LoggerFactory
-
 import scala.collection.mutable.{ArrayBuffer, ListBuffer, Map}
 
 /**
   * mysql funcs object
-  * @author sunliangliang 2018-09-15
-  * @version 1.0
+  * @author sunliangliang 2018-10-19
+  * @version 2.0
   */
 object MysqlDao {
 
