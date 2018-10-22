@@ -5,7 +5,10 @@ import java.sql.{Connection, DriverManager, PreparedStatement}
 import com.sunll.tvtest_streaming_offset.model.StreamingKeyConfig
 import com.sunll.tvtest_streaming_offset.utils.ConfigUtil
 import kafka.common.TopicAndPartition
+import org.apache.spark.streaming.kafka.OffsetRange
 import org.slf4j.LoggerFactory
+
+import scala.collection.mutable
 import scala.collection.mutable.{ArrayBuffer, ListBuffer, Map}
 
 /**
@@ -23,7 +26,9 @@ object MysqlDao {
 
   val descSQL = "select COLUMN_NAME from information_schema.COLUMNS where table_name = ? and table_schema = 'tvtest_streaming';"
 
-  val offsetsSQL = "select "
+  val offsetsSQL = "select topic_name,partition_num,offset from tvtest_streaming_offset where group_name = ? and enabled =1"
+
+  val updateOffsetSQL = "update tvtest_streaming_offset set offset = ? where group_name = ? and topic_name = ? and partition_num = ?"
 
   val logger = LoggerFactory.getLogger(this.getClass)
 
@@ -157,7 +162,7 @@ object MysqlDao {
   }
 
   /**
-    *用来动态修改结果表表结构的函数
+    *用来动态修改结果表表结构的函数,暂时没有用到
     */
   def descDestinationTable(table: String): ArrayBuffer[String] ={
     var res = new ArrayBuffer[String]()
@@ -216,8 +221,76 @@ object MysqlDao {
     }
   }
 
-  def getOffset(group: String): scala.collection.immutable.Map[TopicAndPartition, Long] ={
+  /**
+    * 获取每个topic的每个partition的offset值，用来创建kafkaDStream
+    * @param groupID
+    * @return
+    */
+  def getOffset(groupID: String): scala.collection.immutable.Map[TopicAndPartition, Long] ={
+    var conn: Connection = null
+    var ps: PreparedStatement = null
+    var result: scala.collection.immutable.Map[TopicAndPartition, Long] = scala.collection.immutable.Map[TopicAndPartition, Long]()
+    var topicAndPartition: TopicAndPartition = null
+    try{
+      conn = MysqlManager.getMysqlManager.getConnection
+      ps = conn.prepareStatement(offsetsSQL)
+      ps.setString(1, groupID)
+      val rs = ps.executeQuery()
+      while(rs.next()){
+        topicAndPartition = TopicAndPartition(rs.getString("topic_name"),rs.getInt("partition_num"))
+        result += (topicAndPartition -> rs.getLong("offset"))
+      }
+    }catch {
+      case e: Exception => e.printStackTrace()
+    }finally {
+      if(ps != null){
+        ps.close()
+      }
+      if(conn != null){
+        conn.close()
+      }
+    }
+    result
+  }
 
-    scala.collection.immutable.Map[TopicAndPartition, Long]()
+  /**
+    * 将最新的消费offset更新到mysql的offset配置表中
+    * @param arr 从kafkaDStream中获取的topic+partition+offset数值
+    */
+  def updateOffset(groupID: String, arr: Array[OffsetRange]): Unit ={
+    var conn: Connection = null
+    var ps: PreparedStatement = null
+    try{
+      conn = MysqlManager.getMysqlManager.getConnection
+      conn.setAutoCommit(false)
+      ps = conn.prepareStatement(updateOffsetSQL)
+      for(i <- arr){
+        ps.setLong(1, i.untilOffset)
+        ps.setString(2, groupID)
+        ps.setString(3, i.topic)
+        ps.setInt(4, i.partition)
+        ps.addBatch()
+      }
+      ps.executeBatch()
+      conn.commit()
+    }catch {
+      case e: Exception => e.printStackTrace()
+    }finally {
+      if(ps != null){
+        ps.close()
+      }
+      if(conn != null){
+        conn.close()
+      }
+    }
+  }
+
+  /**
+    * 测试
+    * @param args
+    */
+  def main(args: Array[String]): Unit = {
+    println(getOffset("dt-spark-streaming").values.toSet.contains(0))
+
   }
 }

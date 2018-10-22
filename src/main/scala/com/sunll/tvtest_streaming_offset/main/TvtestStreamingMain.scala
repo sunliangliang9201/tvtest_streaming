@@ -6,7 +6,7 @@ import com.sunll.tvtest_streaming_offset.utils.{ConfigUtil, Constants, KafkaHelp
 import kafka.serializer.StringDecoder
 import org.apache.spark.SparkConf
 import org.apache.spark.streaming.dstream.InputDStream
-import org.apache.spark.streaming.kafka.KafkaUtils
+import org.apache.spark.streaming.kafka.{HasOffsetRanges, KafkaUtils, OffsetRange}
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 import org.slf4j.LoggerFactory
 
@@ -26,10 +26,10 @@ object TvtestStreamingMain {
     val logger = LoggerFactory.getLogger(this.getClass)
     //val streamingKey = args(0)
     val streamingKey = "TvTest"
-    val streamingIntervalTime = 30
+    val streamingIntervalTime = 5
     //是否采用自己管理的offset作为创建kafkaDStream
     //val flag = Integer.valueOf(args(1))
-    val flag = 0
+    val flag = 1
     val streamingKeyConfig = MysqlDao.findStreamingKeyConfig(streamingKey)
     if(null == streamingKeyConfig){
       logger.error("No streaming config found...")
@@ -40,8 +40,8 @@ object TvtestStreamingMain {
     val conf = new SparkConf().setAppName(streamingKeyConfig.appName).setMaster("local[*]")
     val ssc = new StreamingContext(conf, Seconds(streamingIntervalTime))
     val sc = ssc.sparkContext
-    val textFileRdd = sc.textFile("hdfs://192.168.5.31:9000/test/sunliangliang/ip_area_isp.txt")
-    //val textFileRdd = sc.textFile("e:/ip_area_isp.txt")
+    //val textFileRdd = sc.textFile("hdfs://192.168.5.31:9000/test/sunliangliang/ip_area_isp.txt")
+    val textFileRdd = sc.textFile("e:/ip_area_isp.txt")
     var ipAreaIspCache: Array[String]  = textFileRdd.filter(x => {
       x.stripMargin != null && x.stripMargin != ""
     }).collect()
@@ -65,13 +65,19 @@ object TvtestStreamingMain {
     }else{
       kafkaDStream = KafkaHelper.getKafkaDStreamFromOffset(streamingKeyConfig.groupID, ssc, kafkaParams, topicSet)
     }
-    //关键点：通过清洗类清洗日志所有字段
-    val logFormator = Class.forName(Constants.FORMATOR_PACACKE_PREFIX + streamingKeyConfig.formator).newInstance().asInstanceOf[LogFormator]
-    //清洗入库
-    kafkaDStream.foreachRDD(par => )
-//    kafkaDStream.map(x => {
-//      logFormator.format(x._2, ipAreaIspCache, reloadConfig.getFields)
-//    }).foreachRDD(x => x.foreachPartition(y => MysqlDao.insertBatch(y, streamingKeyConfig.tableName, reloadConfig.getInsertSQL(), reloadConfig.getFields)))
+    //通过清洗类清洗日志所有字段
+    val logFormator = Class.forName(Constants.FORMATOR_PACACKE_PREFIX2 + streamingKeyConfig.formator).newInstance().asInstanceOf[LogFormator]
+    //清洗入库并更新offset
+    var offsetRange = Array[OffsetRange]()
+    kafkaDStream.transform(all => {
+      offsetRange = all.asInstanceOf[HasOffsetRanges].offsetRanges
+      all
+    }).map(x => {
+      logFormator.format(x._2, ipAreaIspCache, reloadConfig.getFields)
+    }).foreachRDD(x => {
+      x.foreachPartition(y => MysqlDao.insertBatch(y, streamingKeyConfig.tableName, reloadConfig.getInsertSQL(), reloadConfig.getFields))
+      MysqlDao.updateOffset(streamingKeyConfig.groupID, offsetRange)
+    })
     ssc.start()
     ssc.awaitTermination()
     sc.stop()
