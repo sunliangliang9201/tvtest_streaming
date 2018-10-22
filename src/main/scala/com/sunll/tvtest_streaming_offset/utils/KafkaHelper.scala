@@ -20,7 +20,7 @@ import org.apache.spark.streaming.kafka.KafkaUtils
 object KafkaHelper {
 
   /**
-    * 如果选择了使用自己管理的offset启动kafkaDStream，同时mysql中的offsets值没有0的情况下返回kafkaDStream，否则返回largest情况的kafkaDStream
+    * 如果选择了使用自己管理的offset启动kafkaDStream
     * @param groupID 消费组
     * @param ssc sparkContext
     * @param kafkaParams 参数
@@ -29,9 +29,6 @@ object KafkaHelper {
     */
   def getKafkaDStreamFromOffset(groupID: String, ssc: StreamingContext, kafkaParams: Map[String, String], topicSet: Set[String]): InputDStream[(String, String)] = {
     val fromOffset: Map[TopicAndPartition, Long] = MysqlDao.getOffset(groupID)
-    if(fromOffset.values.toSet.contains(0)) {
-      return KafkaUtils.createDirectStream[String, String, StringDecoder, StringDecoder](ssc, kafkaParams, topicSet)
-    }
     val mesageHandler = (mmd: MessageAndMetadata[String, String]) => (mmd.topic, mmd.message())
     KafkaUtils.createDirectStream[String, String, StringDecoder, StringDecoder, (String, String)](ssc, kafkaParams, fromOffset, mesageHandler)
   }
