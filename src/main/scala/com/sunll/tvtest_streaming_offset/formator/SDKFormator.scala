@@ -1,11 +1,13 @@
 package com.sunll.tvtest_streaming_offset.formator
 
 import java.net.URLDecoder
+
 import com.alibaba.fastjson.{JSON, JSONObject}
 import com.sunll.tvtest_streaming_offset.utils.{IPParser, SDKDecoder}
 import org.slf4j.LoggerFactory
+
 import scala.collection.mutable
-import scala.collection.mutable.ListBuffer
+import scala.collection.mutable.{ListBuffer, Map}
 
 /**
   * format the log string on all fields, then match we need
@@ -14,7 +16,7 @@ import scala.collection.mutable.ListBuffer
   * @version 2.0
   *
   */
-class SDKFormator {
+class SDKFormator extends LogFormator {
 
   val logger = LoggerFactory.getLogger(this.getClass)
 

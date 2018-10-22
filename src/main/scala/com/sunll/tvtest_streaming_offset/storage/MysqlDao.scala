@@ -1,7 +1,10 @@
 package com.sunll.tvtest_streaming_offset.storage
 
 import java.sql.{Connection, DriverManager, PreparedStatement}
+
 import com.sunll.tvtest_streaming_offset.model.StreamingKeyConfig
+import com.sunll.tvtest_streaming_offset.utils.ConfigUtil
+import kafka.common.TopicAndPartition
 import org.slf4j.LoggerFactory
 import scala.collection.mutable.{ArrayBuffer, ListBuffer, Map}
 
@@ -19,6 +22,8 @@ object MysqlDao {
   val configSQL = "select appkey,field,turn from tvtest_streaming_fields where enabled = 1 and streaming_key = ? order by turn"
 
   val descSQL = "select COLUMN_NAME from information_schema.COLUMNS where table_name = ? and table_schema = 'tvtest_streaming';"
+
+  val offsetsSQL = "select "
 
   val logger = LoggerFactory.getLogger(this.getClass)
 
@@ -200,7 +205,7 @@ object MysqlDao {
       ps = conn.prepareStatement(alterSQL.format(tableName, field))
       ps.execute()
     }catch{
-      case e:Exception =>
+      case e: Exception => e.printStackTrace()
     }finally {
       if (ps != null) {
         ps.close()
@@ -209,5 +214,10 @@ object MysqlDao {
         conn.close()
       }
     }
+  }
+
+  def getOffset(group: String): scala.collection.immutable.Map[TopicAndPartition, Long] ={
+
+    scala.collection.immutable.Map[TopicAndPartition, Long]()
   }
 }
