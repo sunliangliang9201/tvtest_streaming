@@ -1,4 +1,4 @@
-package com.sunll.tvtest_streaming_offset.formator
+package com.sunll.tvtest_streaming_offset2.formator
 
 import scala.collection.mutable.{ListBuffer, Map}
 

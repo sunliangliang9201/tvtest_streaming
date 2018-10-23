@@ -1,4 +1,4 @@
-package com.sunll.tvtest_streaming_offset.utils
+package com.sunll.tvtest_streaming_offset2.utils
 
 /**
   * constants

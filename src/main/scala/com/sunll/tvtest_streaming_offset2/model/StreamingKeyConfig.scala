@@ -1,4 +1,4 @@
-package com.sunll.tvtest_streaming_offset.model
+package com.sunll.tvtest_streaming_offset2.model
 
 /**
   * case class for appication config

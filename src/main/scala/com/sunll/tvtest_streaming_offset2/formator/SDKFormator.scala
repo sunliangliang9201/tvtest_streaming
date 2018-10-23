@@ -1,9 +1,9 @@
-package com.sunll.tvtest_streaming_offset.formator
+package com.sunll.tvtest_streaming_offset2.formator
 
 import java.net.URLDecoder
 
 import com.alibaba.fastjson.{JSON, JSONObject}
-import com.sunll.tvtest_streaming_offset.utils.{IPParser, SDKDecoder}
+import com.sunll.tvtest_streaming_offset2.utils.{IPParser, SDKDecoder}
 import org.slf4j.LoggerFactory
 
 import scala.collection.mutable

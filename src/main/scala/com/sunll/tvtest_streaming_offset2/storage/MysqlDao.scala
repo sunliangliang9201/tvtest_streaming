@@ -1,9 +1,9 @@
-package com.sunll.tvtest_streaming_offset.storage
+package com.sunll.tvtest_streaming_offset2.storage
 
 import java.sql.{Connection, DriverManager, PreparedStatement}
 
-import com.sunll.tvtest_streaming_offset.model.StreamingKeyConfig
-import com.sunll.tvtest_streaming_offset.utils.ConfigUtil
+import com.sunll.tvtest_streaming_offset2.model.StreamingKeyConfig
+import com.sunll.tvtest_streaming_offset2.utils.ConfigUtil
 import kafka.common.TopicAndPartition
 import org.apache.spark.streaming.kafka.OffsetRange
 import org.slf4j.LoggerFactory

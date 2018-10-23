@@ -1,8 +1,8 @@
-package com.sunll.tvtest_streaming_offset.main
+package com.sunll.tvtest_streaming_offset2.main
 
-import com.sunll.tvtest_streaming_offset.formator.LogFormator
-import com.sunll.tvtest_streaming_offset.storage.MysqlDao
-import com.sunll.tvtest_streaming_offset.utils.{ConfigUtil, Constants, KafkaHelper, ReloadConfigManager}
+import com.sunll.tvtest_streaming_offset2.formator.LogFormator
+import com.sunll.tvtest_streaming_offset2.storage.MysqlDao
+import com.sunll.tvtest_streaming_offset2.utils.{ConfigUtil, Constants, KafkaHelper, ReloadConfigManager}
 import kafka.serializer.StringDecoder
 import org.apache.spark.SparkConf
 import org.apache.spark.streaming.dstream.InputDStream

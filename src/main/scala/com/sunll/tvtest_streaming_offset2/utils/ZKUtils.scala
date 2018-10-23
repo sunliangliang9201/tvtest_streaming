@@ -1,4 +1,4 @@
-package com.sunll.tvtest_streaming_offset.utils
+package com.sunll.tvtest_streaming_offset2.utils
 
 import org.I0Itec.zkclient.ZkClient
 import scala.collection.mutable.Map

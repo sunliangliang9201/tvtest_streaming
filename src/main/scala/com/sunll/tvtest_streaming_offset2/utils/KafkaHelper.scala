@@ -1,6 +1,6 @@
-package com.sunll.tvtest_streaming_offset.utils
+package com.sunll.tvtest_streaming_offset2.utils
 
-import com.sunll.tvtest_streaming_offset.storage.MysqlDao
+import com.sunll.tvtest_streaming_offset2.storage.MysqlDao
 import kafka.common.TopicAndPartition
 import kafka.message.MessageAndMetadata
 import kafka.serializer.StringDecoder

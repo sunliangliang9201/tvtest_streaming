@@ -1,6 +1,6 @@
-package com.sunll.tvtest_streaming_offset.storage
+package com.sunll.tvtest_streaming_offset2.storage
 
-import com.sunll.tvtest_streaming_offset.utils.ConfigUtil
+import com.sunll.tvtest_streaming_offset2.utils.ConfigUtil
 import redis.clients.jedis.Jedis
 
 /**
