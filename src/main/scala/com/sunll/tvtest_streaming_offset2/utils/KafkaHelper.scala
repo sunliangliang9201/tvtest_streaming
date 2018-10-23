@@ -1,6 +1,6 @@
 package com.sunll.tvtest_streaming_offset2.utils
 
-import com.sunll.tvtest_streaming_offset2.storage.MysqlDao
+import com.sunll.tvtest_streaming_offset2.storage.{MysqlDao, RedisDao}
 import kafka.common.TopicAndPartition
 import kafka.message.MessageAndMetadata
 import kafka.serializer.StringDecoder
@@ -28,7 +28,13 @@ object KafkaHelper {
     * @return kafkaDStream：InputDStream
     */
   def getKafkaDStreamFromOffset(groupID: String, ssc: StreamingContext, kafkaParams: Map[String, String], topicSet: Set[String]): InputDStream[(String, String)] = {
-    val fromOffset: Map[TopicAndPartition, Long] = MysqlDao.getOffsetFromMysql(groupID)
+    var fromOffset: Map[TopicAndPartition, Long] = RedisDao.getOffsetFromRedis(groupID)
+    if(fromOffset.isEmpty){
+      println("**************from mysql************************")
+      fromOffset = MysqlDao.getOffsetFromMysql(groupID)
+    }else{
+      println("***************from redis***********************")
+    }
     val mesageHandler = (mmd: MessageAndMetadata[String, String]) => (mmd.topic, mmd.message())
     KafkaUtils.createDirectStream[String, String, StringDecoder, StringDecoder, (String, String)](ssc, kafkaParams, fromOffset, mesageHandler)
   }

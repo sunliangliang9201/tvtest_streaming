@@ -69,7 +69,7 @@ object TvtestStreamingMain {
       kafkaDStream = KafkaHelper.getKafkaDStreamFromOffset(streamingKeyConfig.groupID, ssc, kafkaParams, topicSet)
     }
     //通过清洗类清洗日志所有字段
-    val logFormator = Class.forName(Constants.FORMATOR_PACACKE_PREFIX2 + streamingKeyConfig.formator).newInstance().asInstanceOf[LogFormator]
+    val logFormator = Class.forName(Constants.FORMATOR_PACACKE_PREFIX3 + streamingKeyConfig.formator).newInstance().asInstanceOf[LogFormator]
     //清洗入库并更新offset
     var offsetRange = Array[OffsetRange]()
     kafkaDStream.transform(all => {

@@ -7,8 +7,6 @@ import com.sunll.tvtest_streaming_offset2.utils.ConfigUtil
 import kafka.common.TopicAndPartition
 import org.apache.spark.streaming.kafka.OffsetRange
 import org.slf4j.LoggerFactory
-
-import scala.collection.mutable
 import scala.collection.mutable.{ArrayBuffer, ListBuffer, Map}
 
 /**
@@ -286,11 +284,25 @@ object MysqlDao {
   }
 
   /**
+    * 重载的更新mysql中offset的方法，跟updateOffset(groupID: String, arr: Array[OffsetRange])不同的是从redis中获取load近mysql
+    * @param groupID 消费组
+    * @param offsetsMap topic+partition+offset的消费信息
+    */
+  def updateOffset(groupID: String, offsetsMap: scala.collection.immutable.Map[TopicAndPartition, Long]): Unit ={
+    val arr: ArrayBuffer[OffsetRange] = ArrayBuffer[OffsetRange]()
+    var tmpOffsetRange: OffsetRange = null
+    for(i <- offsetsMap.keySet){
+      tmpOffsetRange = OffsetRange.create(i.topic, i.partition, 0L, offsetsMap(i))
+      arr += tmpOffsetRange
+    }
+    updateOffset(groupID, arr.toArray)
+  }
+  /**
     * 测试
     * @param args
     */
   def main(args: Array[String]): Unit = {
-    println(getOffset("dt-spark-streaming").values.toSet.contains(0))
+    println(getOffsetFromMysql("dt-spark-streaming").values.toSet.contains(0))
 
   }
 }

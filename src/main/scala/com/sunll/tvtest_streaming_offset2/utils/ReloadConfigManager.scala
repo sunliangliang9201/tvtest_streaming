@@ -1,7 +1,7 @@
 package com.sunll.tvtest_streaming_offset2.utils
 
 import com.sunll.tvtest_streaming_offset2.model.StreamingKeyConfig
-import com.sunll.tvtest_streaming_offset2.storage.MysqlDao
+import com.sunll.tvtest_streaming_offset2.storage.{MysqlDao, RedisDao}
 
 import scala.collection.mutable.{ListBuffer, Map}
 
@@ -28,7 +28,7 @@ class ReloadConfigManager extends Serializable {
         while(true){
           reloadFields(streamingKey)
           reloadTableandInsertSQL(streamingKey, streamingKeyConfig)
-
+          MysqlDao.updateOffset(streamingKeyConfig.groupID, RedisDao.getOffsetFromRedis(streamingKeyConfig.groupID))
           Thread.sleep(flushTime)
         }
       }

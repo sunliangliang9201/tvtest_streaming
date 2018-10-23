@@ -15,4 +15,8 @@ object Constants {
 
   val FORMATOR_PACACKE_PREFIX2 = "com.sunll.tvtest_streaming_offset.formator."
 
+  val FORMATOR_PACACKE_PREFIX3 = "com.sunll.tvtest_streaming_offset2.formator."
+
+  val REDIS_SPLITER = "|"
+
 }
