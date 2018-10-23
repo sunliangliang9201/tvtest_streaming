@@ -28,6 +28,7 @@ class ReloadConfigManager extends Serializable {
         while(true){
           reloadFields(streamingKey)
           reloadTableandInsertSQL(streamingKey, streamingKeyConfig)
+
           Thread.sleep(flushTime)
         }
       }

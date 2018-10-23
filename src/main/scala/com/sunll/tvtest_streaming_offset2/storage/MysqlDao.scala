@@ -223,10 +223,10 @@ object MysqlDao {
 
   /**
     * 获取每个topic的每个partition的offset值，用来创建kafkaDStream
-    * @param groupID
-    * @return
+    * @param groupID 消费组
+    * @return 创建kafkaDStream所需的Map
     */
-  def getOffset(groupID: String): scala.collection.immutable.Map[TopicAndPartition, Long] ={
+  def getOffsetFromMysql(groupID: String): scala.collection.immutable.Map[TopicAndPartition, Long] ={
     var conn: Connection = null
     var ps: PreparedStatement = null
     var result: scala.collection.immutable.Map[TopicAndPartition, Long] = scala.collection.immutable.Map[TopicAndPartition, Long]()

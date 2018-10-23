@@ -1,7 +1,7 @@
 package com.sunll.tvtest_streaming_offset2.main
 
 import com.sunll.tvtest_streaming_offset2.formator.LogFormator
-import com.sunll.tvtest_streaming_offset2.storage.MysqlDao
+import com.sunll.tvtest_streaming_offset2.storage.{MysqlDao, RedisDao}
 import com.sunll.tvtest_streaming_offset2.utils.{ConfigUtil, Constants, KafkaHelper, ReloadConfigManager}
 import kafka.serializer.StringDecoder
 import org.apache.spark.SparkConf
@@ -65,6 +65,7 @@ object TvtestStreamingMain {
     if(flag == 0){
       kafkaDStream = KafkaUtils.createDirectStream[String, String, StringDecoder, StringDecoder](ssc, kafkaParams, topicSet)
     }else{
+      //先去redis中找，如果异常或者找不到则去mysql中找
       kafkaDStream = KafkaHelper.getKafkaDStreamFromOffset(streamingKeyConfig.groupID, ssc, kafkaParams, topicSet)
     }
     //通过清洗类清洗日志所有字段
@@ -78,7 +79,8 @@ object TvtestStreamingMain {
       logFormator.format(x._2, ipAreaIspCache, reloadConfig.getFields)
     }).foreachRDD(x => {
       x.foreachPartition(y => MysqlDao.insertBatch(y, streamingKeyConfig.tableName, reloadConfig.getInsertSQL(), reloadConfig.getFields))
-      MysqlDao.updateOffset(streamingKeyConfig.groupID, offsetRange)
+      //MysqlDao.updateOffset(streamingKeyConfig.groupID, offsetRange)
+      RedisDao.cacheOffset(streamingKeyConfig.groupID, offsetRange)
     })
     ssc.start()
     ssc.awaitTermination()
