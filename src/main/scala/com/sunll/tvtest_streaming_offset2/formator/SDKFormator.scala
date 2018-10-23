@@ -12,8 +12,8 @@ import scala.collection.mutable.{ListBuffer, Map}
 /**
   * format the log string on all fields, then match we need
   *
-  * @author sunliangliang 2018-10-19
-  * @version 2.0
+  * @author sunliangliang 2018-10-23
+  * @version 3.0
   *
   */
 class SDKFormator extends LogFormator {

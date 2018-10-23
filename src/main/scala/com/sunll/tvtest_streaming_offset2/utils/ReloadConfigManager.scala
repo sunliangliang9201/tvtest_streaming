@@ -7,8 +7,8 @@ import scala.collection.mutable.{ListBuffer, Map}
 
 /**
   * flush the config in mysql
-  * @author sunliangliang 2018-10-19
-  * @version 2.0
+  * @author sunliangliang 2018-10-23
+  * @version 3.0
   */
 class ReloadConfigManager extends Serializable {
   //注意：序列化的话，里面的类变量必须是可序列化的

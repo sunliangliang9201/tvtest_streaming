@@ -4,8 +4,8 @@ import java.net.URLDecoder
 
 /**
   * if env in the log is not 0, then we need to decode.
-  * @author sunliangliang 2018-10-19
-  * @version 2.0
+  * @author sunliangliang 2018-10-23
+  * @version 3.0
   *
   */
 object SDKDecoder {

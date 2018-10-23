@@ -13,8 +13,10 @@ import org.slf4j.LoggerFactory
 
 /**
   * tvtest_streaming start main object, start the project and get the config for paralize compute.
-  * @author sunliangliang 2018-10-19 https://github.com/sunliangliang9201/tvtest_streaming
-  * @version 2.0
+  *
+  * the diffrenct is we manage the offsets in redis for cache anf load in mysql.
+  * @author sunliangliang 2018-10-23 https://github.com/sunliangliang9201/tvtest_streaming
+  * @version 3.0
   * tpoic tvtest.sunliangliang
   * consumer-group group-bftv-tvtest
   * result country,province,isp,ltype,uuid,imei,mac,mtype,gid,mos,ver,unet,itime,value,mins,dt,hour

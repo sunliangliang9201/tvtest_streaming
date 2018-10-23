@@ -13,6 +13,8 @@ import org.slf4j.LoggerFactory
 
 /**
   * tvtest_streaming start main object, start the project and get the config for paralize compute.
+  *
+  * the different is we manage the offsets myself in mysql.
   * @author sunliangliang 2018-10-19 https://github.com/sunliangliang9201/tvtest_streaming
   * @version 2.0
   * tpoic tvtest.sunliangliang

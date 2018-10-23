@@ -4,8 +4,8 @@ import scala.collection.mutable.{ListBuffer, Map}
 
 /**
   * the triat of formator, and the obstrct func format.
-  * @author sunliangliang 2018-10-19
-  * @version 2.0
+  * @author sunliangliang 2018-10-23
+  * @version 3.0
   *
   */
 

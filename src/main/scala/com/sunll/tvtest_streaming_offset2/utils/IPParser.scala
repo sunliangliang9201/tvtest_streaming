@@ -8,8 +8,8 @@ import org.slf4j.LoggerFactory
 /**
   * parse ip to country, province, city, isp
   *
-  * @author sunliangliang 2018-10-19
-  * @version 2.0
+  * @author sunliangliang 2018-10-23
+  * @version 3.0
   *
   */
 

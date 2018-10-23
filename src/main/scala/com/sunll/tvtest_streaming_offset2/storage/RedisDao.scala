@@ -7,7 +7,7 @@ import redis.clients.jedis.Jedis
   * redis has many uses, such as cache so much data that increat greatly
   *
   * @author sunliangliang 2018-10-23 https://github.com/sunliangliang9201/tvtest_streaming
-  * @version 2.0
+  * @version 3.0
   */
 object RedisDao {
 

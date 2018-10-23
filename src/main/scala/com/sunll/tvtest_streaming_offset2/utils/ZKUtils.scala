@@ -6,8 +6,8 @@ import scala.collection.mutable.Map
 /**
   * 需要动态更新topic的partition的话就用，不需要不用
   *
-  * @author sunliangliang 2018-10-18 https://github.com/sunliangliang9201/tvtest_streaming
-  * @version 2.0
+  * @author sunliangliang 2018-10-23 https://github.com/sunliangliang9201/tvtest_streaming
+  * @version 3.0
   */
 object ZKUtils {
 

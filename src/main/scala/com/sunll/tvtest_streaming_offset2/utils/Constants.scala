@@ -2,8 +2,8 @@ package com.sunll.tvtest_streaming_offset2.utils
 
 /**
   * constants
-  * @author sunliangliang 2018-10-19
-  * @version 2.0
+  * @author sunliangliang 2018-10-23
+  * @version 3.0
   */
 object Constants {
 

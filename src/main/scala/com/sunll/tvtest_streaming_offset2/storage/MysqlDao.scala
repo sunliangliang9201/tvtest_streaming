@@ -13,8 +13,8 @@ import scala.collection.mutable.{ArrayBuffer, ListBuffer, Map}
 
 /**
   * mysql funcs object
-  * @author sunliangliang 2018-10-19
-  * @version 2.0
+  * @author sunliangliang 2018-10-23
+  * @version 3.0
   */
 object MysqlDao {
 

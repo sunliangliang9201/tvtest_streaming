@@ -7,8 +7,8 @@ import com.sunll.tvtest_streaming_offset2.utils.ConfigUtil
 /**
   * mysql connections pool util
   *
-  * @author sunliangliang 2018-10-19
-  * @version 2.0
+  * @author sunliangliang 2018-10-23
+  * @version 3.0
   */
 class MysqlConnectionPool extends Serializable {
   private val cpds: ComboPooledDataSource = new ComboPooledDataSource(true)
