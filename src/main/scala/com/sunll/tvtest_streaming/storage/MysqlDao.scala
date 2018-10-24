@@ -117,8 +117,6 @@ object MysqlDao {
     try{
       conn = MysqlManager.getMysqlManager.getConnection
       conn.setAutoCommit(false)
-
-      //ps = conn.prepareStatement(insertSQL.format(tableName, arr.mkString(",")))
       for(i <- y){
         var arr = ArrayBuffer[String]()
         for(j <- 0 until fieldsMap(i._1).length){
@@ -130,17 +128,22 @@ object MysqlDao {
             tableMap(i._1).setString(j, i._2(j-1))
           }
           tableMap(i._1).addBatch()
-        }else{
+        }else if(i._1 != "-"){
           for(j <- 1 to i._2.length){
             tableMap(i._1).setString(j, i._2(j-1))
           }
           tableMap(i._1).addBatch()
         }
+//        ps = conn.prepareStatement(insertSQL(i._1).format(tableName + "." + i._1 + "_" + "stat", arr.mkString(",")))
+//        for(j <- 1 to i._2.length){
+//          ps.setString(j, i._2(j-1))
+//        }
+//        ps.execute()
       }
       for(i <- tableMap.values){
         i.executeBatch()
-        conn.commit()
       }
+      conn.commit()
     }catch{
       case e:Exception => logger.error("insert into result error..." + e)
     }finally {

@@ -144,8 +144,8 @@ object MysqlDao {
       }
       for(i <- tableMap.values){
         i.executeBatch()
-        conn.commit()
       }
+      conn.commit()
     }catch{
       case e:Exception => logger.error("insert into result error..." + e)
     }finally {
