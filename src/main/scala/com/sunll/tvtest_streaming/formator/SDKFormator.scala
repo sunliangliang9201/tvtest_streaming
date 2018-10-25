@@ -50,9 +50,11 @@ class SDKFormator extends LogFormator {
       if(appkey != "-"){
         val appkeyList = fieldsMap(appkey)
         val fieldValues = ListBuffer.fill(appkeyList.length)("-")
+        var error: String = null
         for(i <- 0 until appkeyList.length){
           try{
             val field = appkeyList(i)
+            error = field._1
             field._1 match {
               case "country" => fieldValues(field._2) = paramMap.getOrElse("country", "-")
               case "province" => fieldValues(field._2) = paramMap.getOrElse("province", "-")
@@ -67,7 +69,7 @@ class SDKFormator extends LogFormator {
               case _ => fieldValues(field._2) = get2Json(allJson, field._1)
             }
           }catch {
-            case e: Exception => logger.error("fail to find the field", e)
+            case e: Exception => logger.error("fail to find the field:" + error + "origin log is:" + logStr, e)
           }
         }
         println((appkey, fieldValues))
