@@ -7,8 +7,6 @@ import com.sunll.tvtest_streaming_offset.utils.ConfigUtil
 import kafka.common.TopicAndPartition
 import org.apache.spark.streaming.kafka.OffsetRange
 import org.slf4j.LoggerFactory
-
-import scala.collection.mutable
 import scala.collection.mutable.{ArrayBuffer, ListBuffer, Map}
 
 /**
@@ -121,42 +119,42 @@ object MysqlDao {
     var conn: Connection = null
     var ps: PreparedStatement = null
     val tableMap = scala.collection.mutable.Map[String, PreparedStatement]()
-    try{
-      conn = MysqlManager.getMysqlManager.getConnection
-      conn.setAutoCommit(false)
-
-      //ps = conn.prepareStatement(insertSQL.format(tableName, arr.mkString(",")))
-      for(i <- y){
-        var arr = ArrayBuffer[String]()
-        for(j <- 0 until fieldsMap(i._1).length){
-          arr += fieldsMap(i._1)(j)._1
-        }
-        if (i._1 != "-" &&  !tableMap.contains(i._1)){
-          tableMap(i._1) = conn.prepareStatement(insertSQL(i._1).format(tableName + "." + i._1 + "_" + "stat", arr.mkString(",")))
-          for(j <- 1 to i._2.length){
-            tableMap(i._1).setString(j, i._2(j-1))
+    if(!y.isEmpty){
+      try{
+        conn = MysqlManager.getMysqlManager.getConnection
+        conn.setAutoCommit(false)
+        for(i <- y){
+          var arr = ArrayBuffer[String]()
+          for(j <- 0 until fieldsMap(i._1).length){
+            arr += fieldsMap(i._1)(j)._1
           }
-          tableMap(i._1).addBatch()
-        }else{
-          for(j <- 1 to i._2.length){
-            tableMap(i._1).setString(j, i._2(j-1))
+          if (i._1 != "-" &&  !tableMap.contains(i._1)){
+            tableMap(i._1) = conn.prepareStatement(insertSQL(i._1).format(tableName + "." + i._1 + "_" + "stat", arr.mkString(",")))
+            for(j <- 1 to i._2.length){
+              tableMap(i._1).setString(j, i._2(j-1))
+            }
+            tableMap(i._1).addBatch()
+          }else if(i._1 != "-"){
+            for(j <- 1 to i._2.length){
+              tableMap(i._1).setString(j, i._2(j-1))
+            }
+            tableMap(i._1).addBatch()
           }
-          tableMap(i._1).addBatch()
         }
-      }
-      for(i <- tableMap.values){
-        i.executeBatch()
-      }
-      conn.commit()
-    }catch{
-      case e:Exception => logger.error("insert into result error..." + e)
-    }finally {
-      for(i <- tableMap.values){
-        if(i != null)
-        i.close()
-      }
-      if (conn != null) {
-        conn.close()
+        for(i <- tableMap.values){
+          i.executeBatch()
+        }
+        conn.commit()
+      }catch{
+        case e:Exception => logger.error("insert into result error..." + e)
+      }finally {
+        for(i <- tableMap.values){
+          if(i != null)
+            i.close()
+        }
+        if (conn != null) {
+          conn.close()
+        }
       }
     }
   }

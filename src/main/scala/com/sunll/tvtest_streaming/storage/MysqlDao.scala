@@ -78,7 +78,6 @@ object MysqlDao {
     val fieldsMap: Map[String, ListBuffer[(String, Int)]] = Map[String, ListBuffer[(String, Int)]]()
     var conn: Connection = null
     var ps: PreparedStatement = null
-
     try{
       conn = MysqlManager.getMysqlManager.getConnection
       ps = conn.prepareStatement(configSQL)
@@ -114,45 +113,42 @@ object MysqlDao {
     var conn: Connection = null
     var ps: PreparedStatement = null
     val tableMap = scala.collection.mutable.Map[String, PreparedStatement]()
-    try{
-      conn = MysqlManager.getMysqlManager.getConnection
-      conn.setAutoCommit(false)
-      for(i <- y){
-        var arr = ArrayBuffer[String]()
-        for(j <- 0 until fieldsMap(i._1).length){
-          arr += fieldsMap(i._1)(j)._1
-        }
-        if (i._1 != "-" &&  !tableMap.contains(i._1)){
-          tableMap(i._1) = conn.prepareStatement(insertSQL(i._1).format(tableName + "." + i._1 + "_" + "stat", arr.mkString(",")))
-          for(j <- 1 to i._2.length){
-            tableMap(i._1).setString(j, i._2(j-1))
+    if(!y.isEmpty){
+      try{
+        conn = MysqlManager.getMysqlManager.getConnection
+        conn.setAutoCommit(false)
+        for(i <- y){
+          var arr = ArrayBuffer[String]()
+          for(j <- 0 until fieldsMap(i._1).length){
+            arr += fieldsMap(i._1)(j)._1
           }
-          tableMap(i._1).addBatch()
-        }else if(i._1 != "-"){
-          for(j <- 1 to i._2.length){
-            tableMap(i._1).setString(j, i._2(j-1))
+          if (i._1 != "-" &&  !tableMap.contains(i._1)){
+            tableMap(i._1) = conn.prepareStatement(insertSQL(i._1).format(tableName + "." + i._1 + "_" + "stat", arr.mkString(",")))
+            for(j <- 1 to i._2.length){
+              tableMap(i._1).setString(j, i._2(j-1))
+            }
+            tableMap(i._1).addBatch()
+          }else if(i._1 != "-"){
+            for(j <- 1 to i._2.length){
+              tableMap(i._1).setString(j, i._2(j-1))
+            }
+            tableMap(i._1).addBatch()
           }
-          tableMap(i._1).addBatch()
         }
-//        ps = conn.prepareStatement(insertSQL(i._1).format(tableName + "." + i._1 + "_" + "stat", arr.mkString(",")))
-//        for(j <- 1 to i._2.length){
-//          ps.setString(j, i._2(j-1))
-//        }
-//        ps.execute()
-      }
-      for(i <- tableMap.values){
-        i.executeBatch()
-      }
-      conn.commit()
-    }catch{
-      case e:Exception => logger.error("insert into result error..." + e)
-    }finally {
-      for(i <- tableMap.values){
-        if(i != null)
-        i.close()
-      }
-      if (conn != null) {
-        conn.close()
+        for(i <- tableMap.values){
+          i.executeBatch()
+        }
+        conn.commit()
+      }catch{
+        case e:Exception => logger.error("insert into result error..." + e)
+      }finally {
+        for(i <- tableMap.values){
+          if(i != null)
+            i.close()
+        }
+        if (conn != null) {
+          conn.close()
+        }
       }
     }
   }
@@ -164,15 +160,8 @@ object MysqlDao {
     var res = new ArrayBuffer[String]()
     var conn: Connection = null
     var ps: PreparedStatement = null
-    val jdbcUrl = ConfigUtil.getConf.get.getString("tvtest_host")
-    val user = ConfigUtil.getConf.get.getString("tvtest_username")
-    val passwd = ConfigUtil.getConf.get.getString("tvtest_password")
-    val db = ConfigUtil.getConf.get.getString("tvtest_datebase")
-    val port = ConfigUtil.getConf.get.getString("tvtest_port")
-
     try{
-      Class.forName("com.mysql.jdbc.Driver")
-      conn = DriverManager.getConnection("jdbc:mysql://" + jdbcUrl + ":" + port + "/" + db, user, passwd)
+      conn = MysqlManager.getMysqlManager.getConnection
       ps = conn.prepareStatement(descSQL)
       ps.setString(1, table)
       val rows = ps.executeQuery()
@@ -199,21 +188,21 @@ object MysqlDao {
     * @return
     */
   def alterTable(tableName: String, field: String) = {
-    var conn: Connection = null
-    var ps: PreparedStatement = null
-    try{
-      conn = MysqlManager.getMysqlManager.getConnection
-      ps = conn.prepareStatement(alterSQL.format(tableName, field))
-      ps.execute()
-    }catch{
-      case e:Exception =>
-    }finally {
-      if (ps != null) {
-        ps.close()
-      }
-      if (conn != null) {
-        conn.close()
-      }
-    }
+//    var conn: Connection = null
+//    var ps: PreparedStatement = null
+//    try{
+//      conn = MysqlManager.getMysqlManager.getConnection
+//      ps = conn.prepareStatement(alterSQL.format(tableName, field))
+//      ps.execute()
+//    }catch{
+//      case e:Exception =>
+//    }finally {
+//      if (ps != null) {
+//        ps.close()
+//      }
+//      if (conn != null) {
+//        conn.close()
+//      }
+//    }
   }
 }
