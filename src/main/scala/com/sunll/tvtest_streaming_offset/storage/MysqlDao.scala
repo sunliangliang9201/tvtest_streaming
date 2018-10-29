@@ -119,42 +119,78 @@ object MysqlDao {
     var conn: Connection = null
     var ps: PreparedStatement = null
     val tableMap = scala.collection.mutable.Map[String, PreparedStatement]()
-    if(!y.isEmpty){
-      try{
-        conn = MysqlManager.getMysqlManager.getConnection
-        conn.setAutoCommit(false)
-        for(i <- y){
-          var arr = ArrayBuffer[String]()
-          for(j <- 0 until fieldsMap(i._1).length){
-            arr += fieldsMap(i._1)(j)._1
+//    if(!y.isEmpty){
+//      try{
+//        conn = MysqlManager.getMysqlManager.getConnection
+//        conn.setAutoCommit(false)
+//        for(i <- y){
+//          var arr = ArrayBuffer[String]()
+//          for(j <- 0 until fieldsMap(i._1).length){
+//            arr += fieldsMap(i._1)(j)._1
+//          }
+//          if (i._1 != "-" &&  !tableMap.contains(i._1)){
+//            tableMap(i._1) = conn.prepareStatement(insertSQL(i._1).format(tableName + "." + "streaming" + "_" + i._1 + "_" + "stat", arr.mkString(",")))
+//            for(j <- 1 to i._2.length){
+//              tableMap(i._1).setString(j, i._2(j-1))
+//            }
+//            tableMap(i._1).addBatch()
+//          }else if(i._1 != "-"){
+//            for(j <- 1 to i._2.length){
+//              tableMap(i._1).setString(j, i._2(j-1))
+//            }
+//            tableMap(i._1).addBatch()
+//          }
+//        }
+//        for(i <- tableMap.values){
+//          i.executeBatch()
+//        }
+//        conn.commit()
+//      }catch{
+//        case e:Exception => logger.error("insert into result error..." + e)
+//      }finally {
+//        for(i <- tableMap.values){
+//          if(i != null)
+//            i.close()
+//        }
+//        if (conn != null) {
+//          conn.close()
+//        }
+//      }
+//    }
+    try{
+      conn = MysqlManager.getMysqlManager.getConnection
+      conn.setAutoCommit(false)
+      for(i <- y){
+        var arr = ArrayBuffer[String]()
+        for(j <- 0 until fieldsMap(i._1).length){
+          arr += fieldsMap(i._1)(j)._1
+        }
+        if (i._1 != "-" &&  !tableMap.contains(i._1)){
+          tableMap(i._1) = conn.prepareStatement(insertSQL(i._1).format(tableName + "." + "streaming" + "_" + i._1 + "_" + "stat", arr.mkString(",")))
+          for(j <- 1 to i._2.length){
+            tableMap(i._1).setString(j, i._2(j-1))
           }
-          if (i._1 != "-" &&  !tableMap.contains(i._1)){
-            tableMap(i._1) = conn.prepareStatement(insertSQL(i._1).format(tableName + "." + "streaming" + "_" + i._1 + "_" + "stat", arr.mkString(",")))
-            for(j <- 1 to i._2.length){
-              tableMap(i._1).setString(j, i._2(j-1))
-            }
-            tableMap(i._1).addBatch()
-          }else if(i._1 != "-"){
-            for(j <- 1 to i._2.length){
-              tableMap(i._1).setString(j, i._2(j-1))
-            }
-            tableMap(i._1).addBatch()
+          tableMap(i._1).addBatch()
+        }else if(i._1 != "-"){
+          for(j <- 1 to i._2.length){
+            tableMap(i._1).setString(j, i._2(j-1))
           }
+          tableMap(i._1).addBatch()
         }
-        for(i <- tableMap.values){
-          i.executeBatch()
-        }
-        conn.commit()
-      }catch{
-        case e:Exception => logger.error("insert into result error..." + e)
-      }finally {
-        for(i <- tableMap.values){
-          if(i != null)
-            i.close()
-        }
-        if (conn != null) {
-          conn.close()
-        }
+      }
+      for(i <- tableMap.values){
+        i.executeBatch()
+      }
+      conn.commit()
+    }catch{
+      case e:Exception => logger.error("insert into result error..." + e)
+    }finally {
+      for(i <- tableMap.values){
+        if(i != null)
+          i.close()
+      }
+      if (conn != null) {
+        conn.close()
       }
     }
   }
@@ -289,6 +325,5 @@ object MysqlDao {
     */
   def main(args: Array[String]): Unit = {
     println(getOffset("dt-spark-streaming").values.toSet.contains(0))
-
   }
 }

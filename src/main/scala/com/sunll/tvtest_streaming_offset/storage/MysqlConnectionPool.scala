@@ -19,7 +19,7 @@ class MysqlConnectionPool extends Serializable {
   val db = ConfigUtil.getConf.get.getString("tvtest_datebase")
   val port = ConfigUtil.getConf.get.getString("tvtest_port")
   try {
-    cpds.setJdbcUrl("jdbc:mysql://" + jdbcUrl + ":" + port + "/" + db)
+    cpds.setJdbcUrl("jdbc:mysql://" + jdbcUrl + ":" + port + "/" + db + "?" + "useSSL=false")
     cpds.setDriverClass("com.mysql.jdbc.Driver")
     cpds.setUser(user)
     cpds.setPassword(passwd)
