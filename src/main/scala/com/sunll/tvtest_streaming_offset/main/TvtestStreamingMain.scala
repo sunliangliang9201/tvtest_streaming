@@ -26,24 +26,24 @@ object TvtestStreamingMain {
 
   def main(args: Array[String]): Unit = {
     val logger = LoggerFactory.getLogger(this.getClass)
-    //val streamingKey = args(0)
-    val streamingKey = "TvTest"
-    val streamingIntervalTime = 5
+    val streamingKey = args(0)
+    //val streamingKey = "TvTest"
+    val streamingIntervalTime = 30
     //是否采用自己管理的offset作为创建kafkaDStream
-    //val flag = Integer.valueOf(args(1))
-    val flag = 1
+    val flag = Integer.valueOf(args(1))
+    //val flag = 1
     val streamingKeyConfig = MysqlDao.findStreamingKeyConfig(streamingKey)
     if(null == streamingKeyConfig){
       logger.error("No streaming config found...")
       System.exit(-1)
     }
     logger.info("success load the config" + streamingKeyConfig)
-    //val conf = new SparkConf().setAppName(streamingKeyConfig.appName).set("spark.driver.cores", streamingKeyConfig.driverCores)
-    val conf = new SparkConf().setAppName(streamingKeyConfig.appName).setMaster("local[*]")
+    val conf = new SparkConf().setAppName(streamingKeyConfig.appName).set("spark.driver.cores", streamingKeyConfig.driverCores)
+    //val conf = new SparkConf().setAppName(streamingKeyConfig.appName).setMaster("local[*]")
     val ssc = new StreamingContext(conf, Seconds(streamingIntervalTime))
     val sc = ssc.sparkContext
-    //val textFileRdd = sc.textFile("hdfs://192.168.5.31:9000/test/sunliangliang/ip_area_isp.txt")
-    val textFileRdd = sc.textFile("e:/ip_area_isp.txt")
+    val textFileRdd = sc.textFile("hdfs://192.168.5.31:9000/test/sunliangliang/ip_area_isp.txt")
+    //val textFileRdd = sc.textFile("e:/ip_area_isp.txt")
     var ipAreaIspCache: Array[String]  = textFileRdd.filter(x => {
       x.stripMargin != null && x.stripMargin != ""
     }).collect()

@@ -29,6 +29,10 @@ object KafkaHelper {
     */
   def getKafkaDStreamFromOffset(groupID: String, ssc: StreamingContext, kafkaParams: Map[String, String], topicSet: Set[String]): InputDStream[(String, String)] = {
     val fromOffset: Map[TopicAndPartition, Long] = MysqlDao.getOffset(groupID)
+    //如果存在offset=0的情况，那么为了避免消费大量之前的数据，采用consume latest 数据方式
+    if(fromOffset.values.toSet.contains(0)){
+      return KafkaUtils.createDirectStream[String, String, StringDecoder, StringDecoder](ssc, kafkaParams, topicSet)
+    }
     val mesageHandler = (mmd: MessageAndMetadata[String, String]) => (mmd.topic, mmd.message())
     KafkaUtils.createDirectStream[String, String, StringDecoder, StringDecoder, (String, String)](ssc, kafkaParams, fromOffset, mesageHandler)
   }

@@ -25,9 +25,9 @@ class MysqlConnectionPool extends Serializable {
     cpds.setPassword(passwd)
     cpds.setMaxPoolSize(10)
     cpds.setMinPoolSize(1)
-    cpds.setAcquireIncrement(1)
-    cpds.setMaxStatements(100)
-    cpds.setInitialPoolSize(1)
+    cpds.setAcquireIncrement(2)
+    cpds.setMaxStatements(1000)
+    cpds.setInitialPoolSize(2)
   } catch {
     case e: Exception => e.printStackTrace()
   }

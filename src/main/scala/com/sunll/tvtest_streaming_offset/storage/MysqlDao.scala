@@ -20,13 +20,13 @@ object MysqlDao {
 
   val streamingSQL = "select streaming_key, app_name, driver_cores, formator, topics, group_id, table_name, fields, broker_list from realtime_streaming_config where streaming_key = ?"
 
-  val configSQL = "select appkey,field,turn from tvtest_streaming_fields where enabled = 1 and streaming_key = ? order by turn"
+  val configSQL = "select appkey,field,turn from tv_streaming_fields where enabled = 1 and streaming_key = ? order by turn"
 
-  val descSQL = "select COLUMN_NAME from information_schema.COLUMNS where table_name = ? and table_schema = 'tvtest_streaming';"
+  val descSQL = "select COLUMN_NAME from information_schema.COLUMNS where table_name = ? and table_schema = 'tv_streaming';"
 
-  val offsetsSQL = "select topic_name,partition_num,offset from tvtest_streaming_offset where group_name = ? and enabled =1"
+  val offsetsSQL = "select topic_name,partition_num,offset from tv_streaming_offset where group_name = ? and enabled =1"
 
-  val updateOffsetSQL = "update tvtest_streaming_offset set offset = ? where group_name = ? and topic_name = ? and partition_num = ?"
+  val updateOffsetSQL = "update tv_streaming_offset set offset = ? where group_name = ? and topic_name = ? and partition_num = ?"
 
   val logger = LoggerFactory.getLogger(this.getClass)
 
@@ -129,7 +129,7 @@ object MysqlDao {
             arr += fieldsMap(i._1)(j)._1
           }
           if (i._1 != "-" &&  !tableMap.contains(i._1)){
-            tableMap(i._1) = conn.prepareStatement(insertSQL(i._1).format(tableName + "." + i._1 + "_" + "stat", arr.mkString(",")))
+            tableMap(i._1) = conn.prepareStatement(insertSQL(i._1).format(tableName + "." + "streaming" + "_" + i._1 + "_" + "stat", arr.mkString(",")))
             for(j <- 1 to i._2.length){
               tableMap(i._1).setString(j, i._2(j-1))
             }

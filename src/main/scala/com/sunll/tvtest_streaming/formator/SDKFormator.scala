@@ -1,10 +1,8 @@
 package com.sunll.tvtest_streaming.formator
 import java.net.URLDecoder
-
 import com.alibaba.fastjson.{JSON, JSONObject}
 import com.sunll.tvtest_streaming.utils.{IPParser, SDKDecoder}
 import org.slf4j.LoggerFactory
-
 import scala.collection.mutable
 import scala.collection.mutable.{ListBuffer, Map}
 
