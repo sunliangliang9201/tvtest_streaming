@@ -26,7 +26,7 @@ class MysqlConnectionPool extends Serializable {
     cpds.setMaxPoolSize(10)
     cpds.setMinPoolSize(1)
     cpds.setAcquireIncrement(1)
-    cpds.setMaxStatements(500)
+    cpds.setMaxStatements(2000)
     cpds.setInitialPoolSize(1)
   } catch {
     case e: Exception => e.printStackTrace()
