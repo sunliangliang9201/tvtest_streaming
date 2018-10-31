@@ -78,7 +78,7 @@ object TvtestStreamingMain {
       logFormator.format(x._2, ipAreaIspCache, reloadConfig.getFields)
     }).foreachRDD(x => {
       //这里的shuffle效率问题有待商榷
-      x.repartition(8)
+      //x.repartition(8)
       x.foreachPartition(y => MysqlDao.insertBatch(y, streamingKeyConfig.tableName, reloadConfig.getInsertSQL(), reloadConfig.getFields))
       MysqlDao.updateOffset(streamingKeyConfig.groupID, offsetRange)
     })
