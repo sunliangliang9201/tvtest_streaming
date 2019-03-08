@@ -7,9 +7,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f8177c12-07f6-46e1-bc70-b5a464a91048" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/tvtest_streaming_jar.xml" afterPath="" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/test/scala/Main1.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/test/scala/TestKafka.scala" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/test/scala/TestKafkaConsumer.scala" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/test/scala/TestKafkaProducer.scala" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_kafka_kafka_clients_0_8_2_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_kafka_kafka_clients_0_9_0_1.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/log4j.properties" afterPath="$PROJECT_DIR$/src/main/resources/log4j.properties" />
       <change beforePath="$PROJECT_DIR$/tvtest_streaming.iml" afterPath="$PROJECT_DIR$/tvtest_streaming.iml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -31,11 +38,53 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="tvtest_requet.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/scala/tvtest_requet.py">
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="18" column="641" lean-forward="true" selection-start-line="18" selection-start-column="641" selection-end-line="18" selection-end-column="641" />
+            <state relative-caret-position="1278">
+              <caret line="71" column="0" lean-forward="false" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestKafka.scala" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/scala/TestKafka.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="414">
+              <caret line="29" column="38" lean-forward="false" selection-start-line="29" selection-start-column="38" selection-end-line="29" selection-end-column="38" />
+              <folding>
+                <element signature="e#0#54#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestKafkaProducer.scala" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/scala/TestKafkaProducer.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="313">
+              <caret line="51" column="47" lean-forward="true" selection-start-line="51" selection-start-column="47" selection-end-line="51" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestKafkaConsumer.scala" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/scala/TestKafkaConsumer.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="27" column="49" lean-forward="false" selection-start-line="27" selection-start-column="49" selection-end-line="27" selection-end-column="49" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application.properties" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="396">
+              <caret line="22" column="26" lean-forward="false" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -47,8 +96,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
-        <option value="Class" />
         <option value="Package Object" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -75,13 +124,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming2/utils/ConfigUtil.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming2/storage/MySQLDao.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming2/main/TvTestStreaming2Main.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming2/utils/ZKClient.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming2/test/test_consumer_offset.scala" />
         <option value="$PROJECT_DIR$/src/test/scala/TestPost.java" />
-        <option value="$PROJECT_DIR$/src/test/scala/tvtest_requet.py" />
         <option value="$PROJECT_DIR$/src/main/scala/tvtest_streaming2/main/TvtestStreamingMain.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming_offset/model/StreamingKeyConfig.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming/utils/ReloadConfigManager.scala" />
@@ -99,7 +142,6 @@
         <option value="$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming_offset/formator/SDKFormator.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming_offset/utils/KafkaUtils2.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming_offset/utils/Constants.scala" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming_offset/utils/ZKUtils.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming_offset/storage/RedisDao.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/tvtest_streaming_offset2/main/TvtestStreamingMain.scala" />
@@ -122,10 +164,17 @@
         <option value="$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming/formator/SDKFormator.scala" />
         <option value="$PROJECT_DIR$/src/test/scala/RushPart.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming_offset/utils/KafkaHelper.scala" />
-        <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
         <option value="$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming_offset/storage/MysqlDao.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming_offset/main/TvtestStreamingMain.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming_offset/storage/MysqlConnectionPool.scala" />
+        <option value="$PROJECT_DIR$/src/test/scala/Test.java" />
+        <option value="$PROJECT_DIR$/src/test/scala/tvtest_requet.py" />
+        <option value="$PROJECT_DIR$/src/test/scala/Main1.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/src/test/scala/TestKafkaConsumer.scala" />
+        <option value="$PROJECT_DIR$/src/test/scala/TestKafkaProducer.scala" />
+        <option value="$PROJECT_DIR$/src/test/scala/TestKafka.scala" />
       </list>
     </option>
   </component>
@@ -163,8 +212,7 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="85" />
-    <option name="y" value="40" />
+    <option name="y" value="47" />
     <option name="width" value="1425" />
     <option name="height" value="787" />
   </component>
@@ -232,16 +280,81 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
       <pane id="Scratches" />
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="tvtest_streaming" type="b2602c69:ProjectViewProjectNode" />
               <item name="tvtest_streaming" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tvtest_streaming" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tvtest_streaming" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tvtest_streaming" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tvtest_streaming" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tvtest_streaming" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tvtest_streaming" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tvtest_streaming" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tvtest_streaming" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="scala" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tvtest_streaming" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tvtest_streaming" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="scala" type="462c0819:PsiDirectoryNode" />
+              <item name="sunll" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tvtest_streaming" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tvtest_streaming" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="scala" type="462c0819:PsiDirectoryNode" />
+              <item name="sunll" type="462c0819:PsiDirectoryNode" />
+              <item name="tvtest_streaming" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tvtest_streaming" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tvtest_streaming" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="scala" type="462c0819:PsiDirectoryNode" />
+              <item name="sunll" type="462c0819:PsiDirectoryNode" />
+              <item name="tvtest_streaming" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tvtest_streaming" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tvtest_streaming" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tvtest_streaming" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tvtest_streaming" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="scala" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -253,19 +366,19 @@
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../tv_realtime_display" />
+    <property name="project.structure.last.edited" value="Global Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.intentionPowerPack" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\git\tvtest_streaming\src\main\resources" />
-      <recent name="E:\git\tvtest_streaming\src\main\scala" />
-      <recent name="E:\git\tvtest_streaming\src\main\scala\com\sunll\tvtest_streaming\utils" />
-      <recent name="E:\git_sunliangliang9201\tvtest_streaming\src\main\resources" />
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\git\tvtest_streaming\src\test\scala" />
+      <recent name="E:\git\tvtest_streaming\src" />
+      <recent name="E:\git\tvtest_streaming\src\main\scala\com\sunll" />
+      <recent name="E:\git\tvtest_streaming\src\main\scala" />
+      <recent name="E:\git\tvtest_streaming\src\main\scala\com\sunll\tvtest_streaming_offset\storage" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.sunll.tvtest_streaming_offset.formator" />
@@ -274,12 +387,12 @@
       <recent name="com.sunll.tvtest_streaming_offset.model" />
       <recent name="com.sunll.tvtest_streaming_offset.main" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\git\tvtest_streaming\src" />
-      <recent name="E:\git\tvtest_streaming\src\main\scala\com\sunll" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\git\tvtest_streaming\src\main\resources" />
       <recent name="E:\git\tvtest_streaming\src\main\scala" />
-      <recent name="E:\git\tvtest_streaming\src\main\scala\com\sunll\tvtest_streaming_offset\storage" />
-      <recent name="E:\git\tvtest_streaming\src\main\scala\com\sunll\tvtest_streaming_offset\formator" />
+      <recent name="E:\git\tvtest_streaming\src\main\scala\com\sunll\tvtest_streaming\utils" />
+      <recent name="E:\git_sunliangliang9201\tvtest_streaming\src\main\resources" />
+      <recent name="E:\git\tvtest_streaming\src\test\scala" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -294,21 +407,16 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.tvtest_requet (1)">
+  <component name="RunManager" selected="Application.TestKafkaProducer">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="WIDTH" value="400" />
       <option name="HEIGHT" value="300" />
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <module />
     </configuration>
-    <configuration name="RedisDao (1)" type="Application" factoryName="Application" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.sunll.tvtest_streaming_offset2.storage.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="com.sunll.tvtest_streaming_offset2.storage.RedisDao" />
+    <configuration name="TestKafka" type="Application" factoryName="Application" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="TestKafka" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -320,14 +428,9 @@
       <module name="tvtest_streaming" />
       <envs />
     </configuration>
-    <configuration name="RedisDao" type="Application" factoryName="Application" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.sunll.tvtest_streaming_offset.storage.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="com.sunll.tvtest_streaming_offset.storage.RedisDao" />
+    <configuration name="TestKafkaConsumer" type="Application" factoryName="Application" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="TestKafkaConsumer" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -339,14 +442,9 @@
       <module name="tvtest_streaming" />
       <envs />
     </configuration>
-    <configuration name="TvtestStreamingMain (1)" type="Application" factoryName="Application" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.sunll.tvtest_streaming_offset.main.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="com.sunll.tvtest_streaming_offset.main.TvtestStreamingMain" />
+    <configuration name="TestKafkaProducer" type="Application" factoryName="Application" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="TestKafkaProducer" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -490,19 +588,19 @@
     </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Application.TvtestStreamingMain" />
-      <item index="1" class="java.lang.String" itemvalue="Application.TvtestStreamingMain (1)" />
-      <item index="2" class="java.lang.String" itemvalue="Python.tvtest_requet (1)" />
-      <item index="3" class="java.lang.String" itemvalue="Application.RedisDao" />
-      <item index="4" class="java.lang.String" itemvalue="Application.RedisDao (1)" />
-      <item index="5" class="java.lang.String" itemvalue="Application.TvtestStreamingMain (2)" />
+      <item index="1" class="java.lang.String" itemvalue="Python.tvtest_requet (1)" />
+      <item index="2" class="java.lang.String" itemvalue="Application.TvtestStreamingMain (2)" />
+      <item index="3" class="java.lang.String" itemvalue="Application.TestKafka" />
+      <item index="4" class="java.lang.String" itemvalue="Application.TestKafkaProducer" />
+      <item index="5" class="java.lang.String" itemvalue="Application.TestKafkaConsumer" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.tvtest_requet (1)" />
-        <item index="1" class="java.lang.String" itemvalue="Application.TvtestStreamingMain (2)" />
-        <item index="2" class="java.lang.String" itemvalue="Application.RedisDao (1)" />
-        <item index="3" class="java.lang.String" itemvalue="Application.RedisDao" />
-        <item index="4" class="java.lang.String" itemvalue="Application.TvtestStreamingMain (1)" />
+        <item index="0" class="java.lang.String" itemvalue="Application.TestKafkaProducer" />
+        <item index="1" class="java.lang.String" itemvalue="Application.TestKafkaConsumer" />
+        <item index="2" class="java.lang.String" itemvalue="Application.TestKafka" />
+        <item index="3" class="java.lang.String" itemvalue="Python.tvtest_requet (1)" />
+        <item index="4" class="java.lang.String" itemvalue="Application.TvtestStreamingMain (2)" />
       </list>
     </recent_temporary>
   </component>
@@ -529,6 +627,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -548,11 +647,11 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34864864" sideWeight="0.49713466" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17297298" sideWeight="0.49713466" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1527027" sideWeight="0.495702" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39054054" sideWeight="0.495702" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="FAQ Robot" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18982808" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.254298" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -619,48 +718,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming/formator/LogFormator.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="16" lean-forward="false" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming_offset/formator/LogFormator.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="6" lean-forward="false" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming_offset/utils/SDKDecoder.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-48">
-          <caret line="12" column="26" lean-forward="true" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/spark/spark-streaming-kafka_2.10/1.6.1/spark-streaming-kafka_2.10-1.6.1.jar!/org/apache/spark/streaming/kafka/KafkaUtils.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="12" column="370" lean-forward="false" selection-start-line="12" selection-start-column="352" selection-end-line="12" selection-end-column="370" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/scala/testThread.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="5" column="7" lean-forward="false" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming_offset/utils/Constants.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="15" column="67" lean-forward="false" selection-start-line="15" selection-start-column="67" selection-end-line="15" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://D:/soft/scala-2.10.5/src/scala-library-src.jar!/scala/collection/generic/GenMapFactory.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="702">
@@ -754,13 +811,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://D:/soft/Java/jdk1.7.0_51/src.zip!/java/util/Map.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="199" column="5" lean-forward="false" selection-start-line="199" selection-start-column="5" selection-end-line="199" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://D:/soft/Java/jdk1.7.0_51/src.zip!/java/util/Map.java" />
     <entry file="jar://$MAVEN_REPOSITORY$/redis/clients/jedis/2.9.0/jedis-2.9.0.jar!/redis/clients/jedis/BinaryJedisCluster.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
@@ -825,13 +876,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://D:/soft/Java/jdk1.7.0_51/src.zip!/java/sql/Connection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="137" column="22" lean-forward="false" selection-start-line="137" selection-start-column="22" selection-end-line="137" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://D:/soft/Java/jdk1.7.0_51/src.zip!/java/sql/Connection.java" />
     <entry file="file://$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming_offset2/main/TvtestStreamingMain.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
@@ -909,20 +954,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="6" lean-forward="false" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1044">
-          <caret line="58" column="21" lean-forward="false" selection-start-line="58" selection-start-column="21" selection-end-line="58" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming_offset/storage/MysqlDao.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
@@ -944,17 +975,80 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming_offset/main/TvtestStreamingMain.scala">
+    <entry file="file://$PROJECT_DIR$/src/test/scala/Main1.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="80" column="24" lean-forward="false" selection-start-line="80" selection-start-column="24" selection-end-line="80" selection-end-column="24" />
+        <state relative-caret-position="54">
+          <caret line="3" column="13" lean-forward="false" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/scala/tvtest_requet.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="18" column="641" lean-forward="true" selection-start-line="18" selection-start-column="641" selection-end-line="18" selection-end-column="641" />
+        <state relative-caret-position="18">
+          <caret line="10" column="7" lean-forward="false" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming_offset/main/TvtestStreamingMain.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="49" column="24" lean-forward="false" selection-start-line="49" selection-start-column="24" selection-end-line="49" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1278">
+          <caret line="71" column="0" lean-forward="false" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/spark/spark-streaming_2.10/1.6.1/spark-streaming_2.10-1.6.1.jar!/org/apache/spark/streaming/StreamingContext.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="146">
+          <caret line="70" column="0" lean-forward="false" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/sunll/tvtest_streaming/main/TvtestStreamingMain.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-286">
+          <caret line="42" column="16" lean-forward="false" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/scala/TestKafka.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="29" column="38" lean-forward="false" selection-start-line="29" selection-start-column="38" selection-end-line="29" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/scala/TestKafkaConsumer.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="27" column="49" lean-forward="false" selection-start-line="27" selection-start-column="49" selection-end-line="27" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/scala/TestKafkaProducer.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="51" column="47" lean-forward="true" selection-start-line="51" selection-start-column="47" selection-end-line="51" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="22" column="26" lean-forward="false" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
           <folding />
         </state>
       </provider>
@@ -977,7 +1071,7 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
-          <last-edited>Python</last-edited>
+          <last-edited>No facets are configured</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -989,7 +1083,7 @@
       </state>
       <state key="GlobalLibrariesConfigurable.UI">
         <settings>
-          <last-edited>jdk1.7</last-edited>
+          <last-edited>scala-sdk-2.10.5</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1001,7 +1095,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>Python 2.7</last-edited>
+          <last-edited>1.8</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1013,11 +1107,12 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>Python|tvtest_streaming</last-edited>
+          <last-edited>tvtest_streaming</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
